@@ -1,0 +1,14 @@
+//users
+
+fullName
+email
+phone
+password
+usertype
+otp 
+otp expiry
+verification
+profile image
+timestamp
+
+
