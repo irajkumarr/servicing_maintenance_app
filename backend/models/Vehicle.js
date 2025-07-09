@@ -28,7 +28,7 @@ const vehicleSchema = new mongoose.Schema(
     },
     vehicleType: {
       type: String,
-      enum: ["car", "bike", "scooter", "truck", "other"],
+      enum: ["car", "bike"],
       required: true,
     },
     brand: {
@@ -53,11 +53,12 @@ const vehicleSchema = new mongoose.Schema(
     },
     fuelType: {
       type: String,
-      enum: ["petrol", "diesel", "electric", "hybrid", "gas"],
+      enum: ["petrol", "diesel", "electric", "cng"],
       required: true,
     },
     color: { type: String },
     vehiclePhoto: String,
+    isDefault: { type: Boolean, default: false },
   },
   { timestamps: true }
 );

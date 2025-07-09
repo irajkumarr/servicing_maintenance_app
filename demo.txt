@@ -26,3 +26,5 @@ registration number
 color
 fuel type
 vehicle photo
+
+//bookings
