@@ -28,7 +28,9 @@ const serviceProviderSchema = new mongoose.Schema(
         ref: "Service",
       },
     ],
-
+    address: {
+      type: String,
+    },
     availabilityStatus: {
       type: String,
       enum: ["online", "offline", "busy"],

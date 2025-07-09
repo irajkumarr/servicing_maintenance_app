@@ -13,69 +13,16 @@ timestamp
 
 
 //service
- title: { type: String, required: true },                      // e.g. "Premium Car Wash"
-  description: { type: String },                                // Optional detailed description
-  category: {
-    type: String,
-    enum: ["wash", "repair", "tire_change", "oil_change", "battery", "general_checkup"],
-    required: true
-  },
-  basePrice: { type: Number, required: true },                  // Minimum service cost
-  estimatedTime: { type: String },                              // e.g. "45 mins"
-  imageUrl: { type: String },                                   // Optional service image
-  isActive: { type: Boolean, default: true },                   // For admin control
-  serviceProvider: {                                            // Who offers this service
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "ServiceProvider",
-    required: true
-  },
-  rating: { type: Number, default: 0 },                         // Avg rating (optional)
-  reviewCount: { type: Number, default: 0 },                    // Total number of reviews
-  createdAt: { type: Date, default: Date.now }
 
 
-//service ServiceProvider
- fullName: { type: String, required: true },
-  email: { type: String, unique: true },
-  phone: { type: String, unique: true, required: true },
-  password: { type: String, required: true },
-  profileImage: String,
-  isVerified: { type: Boolean, default: false },
-  servicesOffered: [
-    { type: mongoose.Schema.Types.ObjectId, ref: "Service" }
-  ],
-  experienceYears: Number,
-  rating: { type: Number, default: 0 },
-  reviewCount: { type: Number, default: 0 },
-  currentLocation: {
-    latitude: Number,
-    longitude: Number
-  },
-  availabilityStatus: {
-    type: String,
-    enum: ["online", "offline", "busy"],
-    default: "offline"
-  },
-  createdAt: { type: Date, default: Date.now },
+// ServiceProvider
 
-   fullName: { type: String, required: true },
-  phone: { type: String, required: true, unique: true },
-  email: { type: String, unique: true },
-  password: { type: String }, // Admin can set or skip if no login
-  isVerified: { type: Boolean, default: false }, // Admin sets this true
-  profileImage: String,
-  experienceYears: Number,
-  servicesOffered: [
-    { type: mongoose.Schema.Types.ObjectId, ref: "Service" }
-  ],
-  currentLocation: {
-    latitude: Number,
-    longitude: Number,
-  },
-  availabilityStatus: {
-    type: String,
-    enum: ["online", "offline", "busy"],
-    default: "offline"
-  },
-  createdBy: { type: mongoose.Schema.Types.ObjectId, ref: "User" }, // Optional: Admin who added them
-  createdAt: { type: Date, default: Date.now }
+//vehicles
+vehicle type
+brand
+model
+year
+registration number
+color
+fuel type
+vehicle photo

@@ -21,6 +21,11 @@ const serviceSchema = new mongoose.Schema(
       ],
       required: true,
     },
+    type: {
+      type: String,
+      enum: ["car", "bike", "both"],
+      required: true,
+    },
     basePrice: {
       type: Number,
       required: true,
