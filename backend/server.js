@@ -11,7 +11,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 //routes
+const authRoutes = require("./routes/auth");
 
+app.use("/", authRoutes);
 //database connection
 mongoose
   .connect(process.env.MONGODB_CLOUD_URL)
