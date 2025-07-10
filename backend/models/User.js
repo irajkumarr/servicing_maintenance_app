@@ -28,7 +28,6 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: [true, "Password is required"],
       minLength: [6, "Password must be 6 characters long."],
-      maxLength: [50, "Password cannot be more than 50 characters long."],
     },
     profileImage: {
       type: String,
@@ -57,7 +56,7 @@ const userSchema = new mongoose.Schema(
 
 userSchema.pre("save", async function (next) {
   const user = this;
-  if (!user.isModified(password)) return next();
+  if (!user.isModified("password")) return next();
   try {
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(user.password, salt);
@@ -70,7 +69,7 @@ userSchema.pre("save", async function (next) {
 
 userSchema.methods.comparePassword = async function (enteredPassword) {
   try {
-    const isMatch = await bcrypt.compare(enteredPassword, this, password);
+    const isMatch = await bcrypt.compare(enteredPassword, this.password);
     return isMatch;
   } catch (error) {
     throw error;
