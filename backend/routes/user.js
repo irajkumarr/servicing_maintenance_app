@@ -6,13 +6,15 @@ const {
   handleUpdateProfile,
   handleUpdateProfileImage,
 } = require("../controllers/userController");
+const { verifyAndAuthorize } = require("../middlewares/jwt");
 const router = express.Router();
 
-router.get("/", handleGetUserProfile);
-router.put("/", handleUpdateProfile);
-router.delete("/", handleDeleteAccount);
+router.get("/", verifyAndAuthorize, handleGetUserProfile);
+router.put("/", verifyAndAuthorize, handleUpdateProfile);
+router.delete("/", verifyAndAuthorize, handleDeleteAccount);
 router.put(
-  "/profileImage/",
+  "/profile-image",
+  verifyAndAuthorize,
   upload.single("profileImage"),
   handleUpdateProfileImage
 );

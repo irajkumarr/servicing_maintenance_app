@@ -92,16 +92,16 @@ const handleUpdateProfileImage = async (req, res) => {
     if (!req.file) {
       return res
         .status(400)
-        .json({ success: false, message: "No image file uploaded" });
+        .json({ status: false, message: "No image file uploaded" });
     }
 
     // Upload file to Cloudinary
     const result = await cloudinary.uploader.upload_stream(
-      { folder: "profile_images", resource_type: "auto" },
+      { folder: "servicing_app_images", resource_type: "auto" },
       async (error, result) => {
         if (error) {
           return res.status(500).json({
-            success: false,
+            status: false,
             message: "Cloudinary upload failed",
             error,
           });
@@ -117,11 +117,11 @@ const handleUpdateProfileImage = async (req, res) => {
         if (!user) {
           return res
             .status(404)
-            .json({ success: false, message: "User not found" });
+            .json({ status: false, message: "User not found" });
         }
 
         res.status(200).json({
-          success: true,
+          status: true,
           message: "Profile image updated successfully",
           data: user,
         });
@@ -131,7 +131,7 @@ const handleUpdateProfileImage = async (req, res) => {
     // Pipe the file buffer to Cloudinary
     result.end(req.file.buffer);
   } catch (error) {
-    res.status(500).json({ success: false, message: error.message });
+    res.status(500).json({ status: false, message: error.message });
   }
 };
 
