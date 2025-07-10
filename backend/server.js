@@ -12,8 +12,10 @@ app.use(express.urlencoded({ extended: true }));
 
 //routes
 const authRoutes = require("./routes/auth");
+const userRoutes = require("./routes/user");
 
 app.use("/", authRoutes);
+app.use("/api/users", userRoutes);
 //database connection
 mongoose
   .connect(process.env.MONGODB_CLOUD_URL)
