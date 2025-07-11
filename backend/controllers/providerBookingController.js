@@ -6,8 +6,8 @@ const handleGetProviderBookings = async (req, res) => {
       "user provider service"
     );
     res.status(200).json({ status: true, data: bookings });
-  } catch (err) {
-    res.status(500).json({ status: false, message: err.message });
+  } catch (error) {
+    res.status(500).json({ status: false, message: error.message });
   }
 };
 
@@ -34,8 +34,8 @@ const handleAcceptBooking = async (req, res) => {
     res
       .status(200)
       .json({ status: true, message: "Booking accepted", data: booking });
-  } catch (err) {
-    res.status(500).json({ status: false, message: err.message });
+  } catch (error) {
+    res.status(500).json({ status: false, message: error.message });
   }
 };
 
@@ -68,8 +68,8 @@ const handleUpdateBookingStatus = async (req, res) => {
     res
       .status(200)
       .json({ status: true, message: "Booking status updated", data: booking });
-  } catch (err) {
-    res.status(500).json({ status: false, message: err.message });
+  } catch (error) {
+    res.status(500).json({ status: false, message: error.message });
   }
 };
 

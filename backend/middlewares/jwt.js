@@ -45,10 +45,22 @@ const verifyAdmin = (req, res, next) => {
     }
   });
 };
+const verifyProvider = (req, res, next) => {
+  verifyToken(req, res, () => {
+    if (req.user.role === "provider") {
+      next();
+    } else {
+      return res
+        .status(401)
+        .json({ status: false, message: "Access Denied ❌" });
+    }
+  });
+};
 
 module.exports = {
   verifyToken,
   generateToken,
   verifyAndAuthorize,
   verifyAdmin,
+  verifyProvider,
 };

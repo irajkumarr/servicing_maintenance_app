@@ -10,7 +10,7 @@ const User = require("./../models/User");
 const handleGetServiceProvider = async (req, res) => {
   try {
     const providers = await ServiceProvider.find().populate(
-      "userId",
+      "user",
       "-password -otp -otpExpiry"
     );
     if (providers.length == 0) {
@@ -55,7 +55,7 @@ const handleRegisterServiceProvider = async (req, res) => {
 
     // Step 2: Create linked service provider profile
     const provider = new ServiceProvider({
-      userId: user._id,
+      user: user._id,
       experienceYears,
       address,
       servicesOffered: [],
@@ -80,22 +80,22 @@ const handleUpdateProviderStatus = async (req, res) => {
 
   try {
     const updated = await ServiceProvider.findOneAndUpdate(
-      { userId: providerId },
+      { user: providerId },
       { availabilityStatus },
       { new: true }
     );
 
     if (!updated) {
-      return res.status(404).json({ status: false, message: "Provider not found" });
+      return res
+        .status(404)
+        .json({ status: false, message: "Provider not found" });
     }
 
-    res.status(200).json({ status: true, message: "Status updated", data: updated });
-  } catch (err) {
-    res.status(500).json({ status: false, message: err.message });
+    res.status(200).json({ status: true, message: "Status updated" });
+  } catch (error) {
+    res.status(500).json({ status: false, message: error.message });
   }
 };
-
-
 
 module.exports = {
   handleGetServiceProvider,
