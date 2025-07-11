@@ -199,7 +199,53 @@ const handleGetTopRatedServices = async (req, res) => {
     res.status(500).json({ status: false, message: error.message });
   }
 };
+const handleRateService = async (req, res) => {
+  const serviceId = req.params.id;
+  const { rating } = req.body;
 
+  const userId = req.user.id;
+  try {
+    // Validate rating input
+    const parsedRating = Number(rating);
+    if (!parsedRating || parsedRating < 1 || parsedRating > 5) {
+      return res
+        .status(400)
+        .json({ status: false, message: "Rating must be between 1 and 5." });
+    }
+
+    // Find the service
+    const service = await Service.findById(serviceId);
+    if (!service) {
+      return res
+        .status(404)
+        .json({ status: false, message: "Service not found." });
+    }
+
+    // Check if the user already rated
+    if (service.ratedBy.includes(userId)) {
+      return res.status(400).json({
+        status: false,
+        message: "You have already rated this service.",
+      });
+    }
+
+    // Recalculate average rating
+    const totalRating = service.rating * service.reviewCount + parsedRating;
+    service.reviewCount += 1;
+    service.rating = totalRating / service.reviewCount;
+    // Add user to ratedBy
+    service.ratedBy.push(userId);
+
+    await service.save();
+
+    res.status(200).json({
+      status: true,
+      message: "Rating submitted successfully",
+    });
+  } catch (error) {
+    res.status(500).json({ status: false, message: error.message });
+  }
+};
 module.exports = {
   handleCreateService,
   handleDeleteService,
@@ -207,4 +253,5 @@ module.exports = {
   handleGetServiceById,
   handleGetServicesByType,
   handleGetTopRatedServices,
+  handleRateService,
 };
