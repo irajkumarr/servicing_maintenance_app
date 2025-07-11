@@ -24,7 +24,11 @@ const generateToken = (userData) => {
 
 const verifyAndAuthorize = (req, res, next) => {
   verifyToken(req, res, () => {
-    if (req.user.role === "admin" || req.user.role === "user") {
+    if (
+      req.user.role === "admin" ||
+      req.user.role === "user" ||
+      req.user.role === "provider"
+    ) {
       next();
     } else {
       return res
