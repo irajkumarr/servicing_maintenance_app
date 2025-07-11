@@ -67,7 +67,7 @@ const serviceProviderSchema = new mongoose.Schema(
     servicesOffered: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Service", // Assuming you have a Service model
+        ref: "Service",
       },
     ],
     address: {
@@ -78,6 +78,10 @@ const serviceProviderSchema = new mongoose.Schema(
       type: String,
       enum: ["online", "offline", "busy"],
       default: "offline",
+    },
+    createdBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
     },
     isVerified: {
       type: Boolean,
