@@ -24,6 +24,17 @@ const generateToken = (userData) => {
 
 const verifyAndAuthorize = (req, res, next) => {
   verifyToken(req, res, () => {
+    if (req.user.role === "admin" || req.user.role === "user") {
+      next();
+    } else {
+      return res
+        .status(401)
+        .json({ status: false, message: "Access Denied ❌" });
+    }
+  });
+};
+const verifyAndAuthorizeAll = (req, res, next) => {
+  verifyToken(req, res, () => {
     if (
       req.user.role === "admin" ||
       req.user.role === "user" ||
@@ -65,6 +76,7 @@ module.exports = {
   verifyToken,
   generateToken,
   verifyAndAuthorize,
+  verifyAndAuthorizeAll,
   verifyAdmin,
   verifyProvider,
 };

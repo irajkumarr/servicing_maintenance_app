@@ -1,3 +1,5 @@
+const mongoose = require("mongoose");
+
 const carBrands = [
   "Honda",
   "Maruti Suzuki",

@@ -16,11 +16,13 @@ const userRoutes = require("./routes/user");
 const serviceProviderRoutes = require("./routes/serviceProvider");
 const providerBookingRoutes = require("./routes/providerBooking");
 const serviceRoutes = require("./routes/service");
+const vehiclesRoutes = require("./routes/vehicle");
 
 app.use("/", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/providers", serviceProviderRoutes);
 app.use("/api/services", serviceRoutes);
+app.use("/api/vehicles", vehiclesRoutes);
 app.use("/api/providers/bookings", providerBookingRoutes);
 //database connection
 mongoose
