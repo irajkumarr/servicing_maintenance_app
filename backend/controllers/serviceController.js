@@ -177,10 +177,34 @@ const handleDeleteService = async (req, res) => {
   }
 };
 
+const handleGetTopRatedServices = async (req, res) => {
+  try {
+    const limit = parseInt(req.query.limit) || 5; // default: top 5
+
+    const topServices = await Service.find({ isActive: true })
+      .sort({ rating: -1, reviewCount: -1 })
+      .limit(limit)
+      .select("-__v -createdAt -updatedAt")
+      .populate({
+        path: "serviceProvider",
+        select: "user address availabilityStatus",
+        populate: {
+          path: "user",
+          select: "fullName email phoneNumber",
+        },
+      });
+
+    res.status(200).json(topServices);
+  } catch (error) {
+    res.status(500).json({ status: false, message: error.message });
+  }
+};
+
 module.exports = {
   handleCreateService,
   handleDeleteService,
   handleGetServices,
   handleGetServiceById,
   handleGetServicesByType,
+  handleGetTopRatedServices,
 };
