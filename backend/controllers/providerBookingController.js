@@ -3,7 +3,7 @@ const Booking = require("./../models/Booking");
 const handleGetProviderBookings = async (req, res) => {
   try {
     const bookings = await Booking.find({ provider: req.user.id }).populate(
-      "user provider service"
+      "user provider service vehicle"
     );
     res.status(200).json({ status: true, data: bookings });
   } catch (error) {
