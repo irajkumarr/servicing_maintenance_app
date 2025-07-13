@@ -8,7 +8,7 @@ const {
   handleGetUserBookings,
   handleTrackBooking,
 } = require("./../controllers/bookingController");
-const { verifyAndAuthorize, verifyAdmin, verifyAndAuthorizeAll } = require("./../middlewares/jwt");
+const { verifyAndAuthorize, verifyAdmin, authorizeAnyRole  } = require("./../middlewares/jwt");
 
 router.post("/", verifyAndAuthorize, handleCreateBooking);
 router.get("/", verifyAdmin, handleGetAllBookings);

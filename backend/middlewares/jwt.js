@@ -33,7 +33,7 @@ const verifyAndAuthorize = (req, res, next) => {
     }
   });
 };
-const verifyAndAuthorizeAll = (req, res, next) => {
+const authorizeAnyRole  = (req, res, next) => {
   verifyToken(req, res, () => {
     if (
       req.user.role === "admin" ||
@@ -76,7 +76,7 @@ module.exports = {
   verifyToken,
   generateToken,
   verifyAndAuthorize,
-  verifyAndAuthorizeAll,
+  authorizeAnyRole ,
   verifyAdmin,
   verifyProvider,
 };

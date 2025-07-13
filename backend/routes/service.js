@@ -12,17 +12,17 @@ const {
   verifyProvider,
   verifyAdmin,
   verifyAndAuthorize,
-  verifyAndAuthorizeAll,
+  authorizeAnyRole ,
 } = require("../middlewares/jwt");
 const router = express.Router();
 
 const upload = require("./../middlewares/multer");
 
 router.post("/", verifyProvider, upload.single("image"), handleCreateService);
-router.get("/", verifyAndAuthorizeAll, handleGetServices);
-router.get("/type", verifyAndAuthorizeAll, handleGetServicesByType);
-router.get("/top-rated", verifyAndAuthorizeAll, handleGetTopRatedServices);
-router.get("/:id", verifyAndAuthorizeAll, handleGetServiceById);
+router.get("/", authorizeAnyRole , handleGetServices);
+router.get("/type", authorizeAnyRole , handleGetServicesByType);
+router.get("/top-rated", authorizeAnyRole , handleGetTopRatedServices);
+router.get("/:id", authorizeAnyRole , handleGetServiceById);
 router.delete("/:id", verifyProvider, handleDeleteService);
 router.post("/:id/rate", verifyAndAuthorize, handleRateService);
 
