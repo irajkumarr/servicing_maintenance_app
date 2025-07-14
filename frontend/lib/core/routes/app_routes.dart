@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/core/routes/routes_constant.dart';
+import 'package:frontend/navigation_menu.dart';
 import 'package:go_router/go_router.dart';
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
@@ -7,11 +8,17 @@ final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 class AppRoutes {
   late GoRouter router = GoRouter(
     // initialLocation: "/login",
-    initialLocation: "/",
+    initialLocation: "/navigationMenu",
     navigatorKey: navigatorKey,
 
     routes: [
-    
+      GoRoute(
+        name: RoutesConstant.navigationMenu,
+        path: "/navigationMenu",
+        pageBuilder: (context, state) {
+          return MaterialPage(child: NavigationMenu());
+        },
+      ),
     ],
     errorPageBuilder: (context, state) {
       return MaterialPage(

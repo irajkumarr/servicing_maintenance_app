@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:frontend/common/widgets/alert_box/alert_box.dart';
 import 'package:frontend/core/network/connectivity_checker.dart';
 import 'package:frontend/core/utils/constants/colors.dart';
-import 'package:iconsax/iconsax.dart';
+import 'package:icons_plus/icons_plus.dart';
+// import 'package:iconsax/iconsax.dart';
 import 'package:provider/provider.dart';
 
 class NavigationMenu extends StatelessWidget {
@@ -30,7 +31,8 @@ class NavigationMenu extends StatelessWidget {
 
                 currentIndex: navigationProvider.selectedIndex,
                 selectedItemColor: KColors.primary,
-                unselectedItemColor: KColors.darkGrey,
+                // ignore: deprecated_member_use
+                unselectedItemColor: KColors.dark.withOpacity(0.7),
                 type: BottomNavigationBarType.fixed,
 
                 selectedLabelStyle: TextStyle(
@@ -50,24 +52,24 @@ class NavigationMenu extends StatelessWidget {
 
                 items: [
                   BottomNavigationBarItem(
-                    icon: Icon(Iconsax.home_2),
+                    icon: Icon(EvaIcons.home_outline),
                     label: "Home",
-                    activeIcon: Icon(Iconsax.home_25),
+                    // activeIcon: Icon(Iconsax.home_1_bulk),
                   ),
                   BottomNavigationBarItem(
-                    icon: Icon(Iconsax.home_2),
-                    label: "Home",
-                    activeIcon: Icon(Iconsax.home_25),
+                    icon: Icon(HeroIcons.wrench),
+                    label: "Services",
+                    // activeIcon: Icon(Iconsax.home_1_bulk),
                   ),
                   BottomNavigationBarItem(
-                    icon: Icon(Iconsax.home_2),
-                    label: "Home",
-                    activeIcon: Icon(Iconsax.home_25),
+                    icon: Icon(Icons.calendar_today_outlined),
+                    label: "History",
+                    // activeIcon: Icon(Iconsax.home_1_bulk),
                   ),
                   BottomNavigationBarItem(
-                    icon: Icon(Iconsax.home_2),
-                    label: "Home",
-                    activeIcon: Icon(Iconsax.home_25),
+                    icon: Icon(Iconsax.user_outline),
+                    label: "Profile",
+                    // activeIcon: Icon(Iconsax.home_1_bulk),
                   ),
                 ],
               ),

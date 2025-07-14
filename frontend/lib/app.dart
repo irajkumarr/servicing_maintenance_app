@@ -18,8 +18,8 @@ class App extends StatelessWidget {
           providers: AppProviders.providers,
           child: MaterialApp.router(
             title: 'ServiceOnWheels',
-            debugShowCheckedModeBanner: false,
             theme: KAppTheme.lightTheme,
+            debugShowCheckedModeBanner: false,
             routerConfig: AppRoutes().router,
           ),
         );
