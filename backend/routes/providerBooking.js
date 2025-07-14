@@ -1,13 +1,20 @@
 const express = require("express");
-const { 
+const {
   handleAcceptBooking,
   handleGetProviderBookings,
-  handleUpdateBookingStatus, } = require("../controllers/providerBookingController");
+  handleUpdateBookingStatus,
+} = require("../controllers/providerBookingController");
 
 const router = express.Router();
 
-router.put("/:id/accept", handleAcceptBooking);
-router.get("/", handleGetProviderBookings);
-router.put("/:id/status", handleUpdateBookingStatus);
+const {
+  verifyAndAuthorize,
+  verifyAdmin,
+  authorizeAnyRole,
+  verifyProvider,
+} = require("./../middlewares/jwt");
+router.put("/:id/accept", verifyProvider, handleAcceptBooking);
+router.get("/", verifyProvider, handleGetProviderBookings);
+router.put("/:id/status", verifyProvider, handleUpdateBookingStatus);
 
 module.exports = router;

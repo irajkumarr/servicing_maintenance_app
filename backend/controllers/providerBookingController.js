@@ -5,7 +5,7 @@ const handleGetProviderBookings = async (req, res) => {
     const bookings = await Booking.find({ provider: req.user.id }).populate(
       "user provider service vehicle"
     );
-    res.status(200).json({ status: true, data: bookings });
+    res.status(200).json(bookings);
   } catch (error) {
     res.status(500).json({ status: false, message: error.message });
   }
@@ -31,9 +31,7 @@ const handleAcceptBooking = async (req, res) => {
     booking.provider = req.user.id;
     await booking.save();
 
-    res
-      .status(200)
-      .json({ status: true, message: "Booking accepted", data: booking });
+    res.status(200).json({ status: true, message: "Booking accepted" });
   } catch (error) {
     res.status(500).json({ status: false, message: error.message });
   }
@@ -43,7 +41,13 @@ const handleUpdateBookingStatus = async (req, res) => {
   const { status } = req.body;
   const bookingId = req.params.id;
 
-  const validStatuses = ["accepted", "in-progress", "completed", "cancelled"];
+  const validStatuses = [
+    "accepted",
+    "on_the_way",
+    "in_progress",
+    "completed",
+    "cancelled",
+  ];
   if (!validStatuses.includes(status)) {
     return res.status(400).json({ status: false, message: "Invalid status" });
   }
@@ -65,9 +69,7 @@ const handleUpdateBookingStatus = async (req, res) => {
     booking.status = status;
     await booking.save();
 
-    res
-      .status(200)
-      .json({ status: true, message: "Booking status updated", data: booking });
+    res.status(200).json({ status: true, message: "Booking status updated" });
   } catch (error) {
     res.status(500).json({ status: false, message: error.message });
   }

@@ -21,7 +21,7 @@ const handleGetAllBookings = async (req, res) => {
       .populate("service")
       .populate("provider");
 
-    res.status(200).json({ status: true, data: bookings });
+    res.status(200).json(bookings);
   } catch (error) {
     res.status(500).json({ status: false, message: error.message });
   }
@@ -32,7 +32,9 @@ const handleCreateBooking = async (req, res) => {
     const { vehicle, service, scheduledAt, location, totalAmount } = req.body;
 
     const userId = req.user.id;
-
+    if (req.user.role !== "user") {
+      return res.status(403).json({ status: false, message: "Access denied" });
+    }
     const serviceData = await Service.findById(service);
     if (!serviceData) {
       return res
@@ -107,8 +109,8 @@ const handleGetBookingById = async (req, res) => {
     const userId = req.user.id;
     if (
       req.user.role !== "admin" &&
-      booking.user.toString() !== userId &&
-      booking.provider?.toString() !== userId
+      booking.user._id.toString() !== userId &&
+      booking.provider?._id.toString() !== userId
     ) {
       return res.status(403).json({ status: false, message: "Access denied" });
     }

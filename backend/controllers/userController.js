@@ -54,7 +54,6 @@ const handleUpdateProfile = async (req, res) => {
     res.status(200).json({
       status: true,
       message: "Profile updated successfully",
-      user,
     });
   } catch (error) {
     res.status(500).json({
@@ -123,7 +122,6 @@ const handleUpdateProfileImage = async (req, res) => {
         res.status(200).json({
           status: true,
           message: "Profile image updated successfully",
-          data: user,
         });
       }
     );

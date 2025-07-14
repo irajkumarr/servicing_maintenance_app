@@ -11,7 +11,7 @@ const handleGetUserAddresses = async (req, res) => {
   try {
     const userId = req.user.id;
     const addresses = await Address.find({ user: userId });
-    res.status(200).json({ status: true, data: addresses });
+    res.status(200).json(addresses);
   } catch (error) {
     res.status(500).json({ status: false, message: error.message });
   }
@@ -40,9 +40,7 @@ const handleAddUserAddress = async (req, res) => {
     });
 
     await newAddress.save();
-    res
-      .status(201)
-      .json({ status: true, message: "Address added", data: newAddress });
+    res.status(201).json({ status: true, message: "Address added" });
   } catch (error) {
     res.status(500).json({ status: false, message: error.message });
   }
@@ -119,9 +117,7 @@ const handleSetDefaultAddress = async (req, res) => {
     address.isDefault = true;
     await address.save();
 
-    res
-      .status(200)
-      .json({ status: true, message: "Address set as default", data: address });
+    res.status(200).json({ status: true, message: "Address set as default" });
   } catch (error) {
     res.status(500).json({ status: false, message: error.message });
   }
@@ -144,10 +140,7 @@ const handleGetDefaultAddress = async (req, res) => {
       });
     }
 
-    res.status(200).json({
-      status: true,
-      data: defaultAddress,
-    });
+    res.status(200).json(defaultAddress);
   } catch (error) {
     res.status(500).json({ status: false, message: error.message });
   }

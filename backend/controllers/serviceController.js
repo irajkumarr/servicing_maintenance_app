@@ -205,6 +205,13 @@ const handleRateService = async (req, res) => {
 
   const userId = req.user.id;
   try {
+
+     if (req.user.role !== "user") {
+      return res.status(403).json({
+        status: false,
+        message: "Only users are allowed to rate services.",
+      });
+    }
     // Validate rating input
     const parsedRating = Number(rating);
     if (!parsedRating || parsedRating < 1 || parsedRating > 5) {

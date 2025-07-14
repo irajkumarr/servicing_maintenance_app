@@ -73,6 +73,7 @@ const handleCreateVehicle = async (req, res) => {
     );
     stream.end(req.file.buffer);
   } catch (error) {
+    // console.log(error);
     res.status(500).json({ status: false, message: error.message });
   }
 };

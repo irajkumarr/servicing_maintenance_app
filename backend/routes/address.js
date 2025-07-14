@@ -18,7 +18,7 @@ router.post("/", verifyAndAuthorize, handleAddUserAddress);
 router.get("/", verifyAndAuthorize, handleGetUserAddresses);
 router.get("/default", verifyAndAuthorize, handleGetDefaultAddress);
 router.delete("/:id", verifyAndAuthorize, handleDeleteAddress);
-router.patch("/:id/cancel", verifyAndAuthorize, handleSetDefaultAddress);
+router.patch("/:id/default", verifyAndAuthorize, handleSetDefaultAddress);
 router.put("/:id", verifyAndAuthorize, handleUpdateAddress);
 
 module.exports = router;
