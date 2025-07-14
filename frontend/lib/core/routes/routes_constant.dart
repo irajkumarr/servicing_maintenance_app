@@ -1,5 +1,6 @@
 class RoutesConstant {
   static const String authWrapper = "authWrapper";
+  static const String navigationMenu = "navigationMenu";
   static const String login = "login";
   static const String signup = "signup";
   static const String dashboard = "dashboard";
