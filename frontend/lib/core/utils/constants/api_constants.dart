@@ -1,0 +1,12 @@
+/* -- LIST OF Constants used in APIs -- */
+
+const String kSecretAPIKey = "";
+// const String kGoogleMapAPIKey = "AIzaSyABiF9wE3fxwX9rWGUsQfWurlOzmpyw4S8";
+const String kGoogleMapAPIKey = "AIzaSyACJcraRqL3WWJwgh2gdwF64Mtpnu_VLY0";
+
+// const String kAppBaseUrl = "http://192.168.100.90:4000";
+const String kAppBaseUrl = "http://192.168.100.90:5000";
+// const String kAppBaseUrl = "https://job-seeker-application-dpfi.onrender.com";
+
+const String kServerConstant =
+    "ya29.c.c0ASRK0Ga-yyLy5cr4Qj9aBlzAGMQ79SXcbvTnT31Cw4A900LwwC_WEJnT0etEibzfYQJPt6Cs-fHqjhRXpC0-HIyDsCQBPShcz1Z8cblqQf09xPenkmIfaP7vZuN0LjQVAE_Or4P9NAxPiyc4U_oDWW7ayO09Ag5KaXnft7MpiQx61awuZNf7Kg6eKXXzAB6MLkFCvScxAd9tYyWb7TkJtQsnx9rRCwIUKI4ltcDdoW8KE66VZF65opKMX05EoAU44xqZ8xwZx9s_7eQctP-uYdofD1ff9ZcBl8_-tSZ3bKXShndO0tATOfTAXeuVlPc0WXGdjTa97AjfjnIakjuBwFdoPzl6VuQBhqzWuZlAUKevwLmjj7En__vB6plUG389CVIlJjbY00djwmhqX2dQ-z1SWjaexgermXOUms2RrQJlv4l3IFg-8upFftIOIs-fsf3f9VFlp-hnZbUbnYmz9XY-Jn5xyRhJuyZoZFv4p0ygyQ9Jb75uXW57xF14geUw_qkX01dxuroa4hUiUntrJfm4Ojd18RB0rs3Vgew7elUueSy_Wl_m6fiq4egt6Qme2w8_jBSiOd2BnryYe-gtW7c7wMQSpQkOegVjUMUpZjBR6gyXXfdXumX6RaZqkcfj1jqbo-hqllUm6BYpovQhzwbdt5247suptf9zs0OQhjMfUMXdZQdOJUp8h1WkMIFYz16JjYYk7cawRJbZ4VXMmWOqYQkRc428yQl-yWf4-e70IR-Jo0nYsBZRmdxas-RjjYIFOixxMpjmpkfy8ZeF_sO831F-Q2sXyFkg_7RuQ55a5b2gbvoQ50-nhcj59XYjhda953S2hiBnzJfMzpvXR3k02b93rpxx1sYWtgQhnyWU83RuW7ZVJfe8eF9BlmqksvqQkXYhqx_ZY7hrj31mUMxQSQvjO5Ukg9du1a_iIvbrpRwjQw7qQuav2clS9Rz5WrrYo3yQF2zWcYFbos5B17WjW3akexp62760h9O3gvQ_tW171vrS6u";
