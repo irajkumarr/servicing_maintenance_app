@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "856816216502",
+    "project_id": "serviceonwheels-app",
+    "storage_bucket": "serviceonwheels-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:856816216502:android:ab7440ded2dcdd149cb917",
+        "android_client_info": {
+          "package_name": "com.example.frontend"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBGXeg4fPPaLyHRGHbVeWTvVni4FTZsbYw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
