@@ -3,6 +3,7 @@ class RoutesConstant {
   static const String authWrapper = "authWrapper";
   static const String login = "login";
   static const String signup = "signup";
+  static const String otpVerify = "otpVerify";
   static const String dashboard = "dashboard";
   static const String allStaff = "allStaff";
   static const String createIssue = "createIssue";

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend/core/routes/routes_constant.dart';
 import 'package:frontend/features/authentication/screens/login/login.dart';
 import 'package:frontend/features/authentication/screens/signup/signup.dart';
+import 'package:frontend/features/authentication/screens/verification/otp_verification.dart';
 import 'package:frontend/navigation_menu.dart';
 import 'package:go_router/go_router.dart';
 
@@ -33,6 +34,13 @@ class AppRoutes {
         path: "/signup",
         pageBuilder: (context, state) {
           return MaterialPage(child: SignupScreen());
+        },
+      ),
+      GoRoute(
+        name: RoutesConstant.otpVerify,
+        path: "/otpVerify",
+        pageBuilder: (context, state) {
+          return MaterialPage(child: OtpVerificationScreen());
         },
       ),
     ],

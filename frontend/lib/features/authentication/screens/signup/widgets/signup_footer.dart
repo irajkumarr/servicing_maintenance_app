@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:frontend/common/widgets/texts/label_text.dart';
 import 'package:frontend/core/routes/routes_constant.dart';
 import 'package:frontend/core/utils/constants/sizes.dart';
-import 'package:frontend/core/utils/divider/dotted_divider.dart';
 import 'package:go_router/go_router.dart';
 
 class SignupFooter extends StatelessWidget {
