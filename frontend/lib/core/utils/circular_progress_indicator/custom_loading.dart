@@ -9,10 +9,12 @@ class CustomLoading extends StatelessWidget {
     this.size = KSizes.defaultSpace,
     this.isLoadingTextShowed = true,
     this.padding = const EdgeInsets.only(top: KSizes.md),
+    this.color=KColors.white,
   });
   final double size;
   final bool isLoadingTextShowed;
   final EdgeInsets padding;
+  final Color color;
 
   @override
   Widget build(BuildContext context) {
@@ -21,18 +23,15 @@ class CustomLoading extends StatelessWidget {
         padding: padding,
         child: Column(
           children: [
-            LoadingAnimationWidget.staggeredDotsWave(
-              color: KColors.primary,
-              size: size,
-            ),
+            LoadingAnimationWidget.staggeredDotsWave(color: color, size: size),
             !isLoadingTextShowed
                 ? SizedBox()
                 : Text(
                     "Loading",
-                    style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                          color: KColors.primary,
-                        ),
-                  )
+                    style: Theme.of(
+                      context,
+                    ).textTheme.bodyLarge!.copyWith(color: KColors.white),
+                  ),
           ],
         ),
       ),

@@ -5,7 +5,7 @@ const String kSecretAPIKey = "";
 const String kGoogleMapAPIKey = "AIzaSyACJcraRqL3WWJwgh2gdwF64Mtpnu_VLY0";
 
 // const String kAppBaseUrl = "http://192.168.100.90:4000";
-const String kAppBaseUrl = "http://192.168.100.90:5000";
+const String kAppBaseUrl = "http://192.168.100.90:3000";
 // const String kAppBaseUrl = "https://job-seeker-application-dpfi.onrender.com";
 
 const String kServerConstant =

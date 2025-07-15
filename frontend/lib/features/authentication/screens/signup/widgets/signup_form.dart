@@ -5,7 +5,10 @@ import 'package:frontend/common/widgets/texts/label_text.dart';
 import 'package:frontend/core/utils/constants/colors.dart';
 import 'package:frontend/core/utils/constants/sizes.dart';
 import 'package:frontend/core/utils/validators/validation.dart';
+import 'package:frontend/data/models/user_request.dart';
 import 'package:frontend/features/authentication/providers/password_provider.dart';
+import 'package:frontend/features/authentication/providers/signup_provider.dart';
+import 'package:frontend/features/authentication/providers/timer_provider.dart';
 import 'package:provider/provider.dart';
 
 class SignupForm extends StatefulWidget {
@@ -36,6 +39,7 @@ class _SignupFormState extends State<SignupForm> {
 
   @override
   Widget build(BuildContext context) {
+    final signupProvider = context.read<SignupProvider>();
     return Container(
       padding: EdgeInsets.all(KSizes.md),
       decoration: BoxDecoration(
@@ -170,10 +174,18 @@ class _SignupFormState extends State<SignupForm> {
             //login button
             CustomButton(
               text: "Create Account",
-              onPressed: () {
+              onPressed: () async {
                 if (_signupKey.currentState!.validate()) {
-                  // print(_emailController.text.trim());
-                  // print(_passwordController.text.trim());
+                  UserRequest model = UserRequest(
+                    fullName: _fullNameController.text.trim(),
+                    email: _emailController.text.trim(),
+                    password: _passwordController.text.trim(),
+                    phoneNumber: _phoneNumberController.text.trim(),
+                  );
+                  String data = userRequestToJson(model);
+                  String email = model.email;
+                  await signupProvider.register(context, data, email);
+                  context.read<ResendTimerProvider>().startTimer();
                 }
               },
             ),

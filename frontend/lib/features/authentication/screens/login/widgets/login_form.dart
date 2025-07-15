@@ -5,6 +5,7 @@ import 'package:frontend/common/widgets/texts/label_text.dart';
 import 'package:frontend/core/utils/constants/colors.dart';
 import 'package:frontend/core/utils/constants/sizes.dart';
 import 'package:frontend/core/utils/validators/validation.dart';
+import 'package:frontend/features/authentication/providers/login_provider.dart';
 import 'package:frontend/features/authentication/providers/password_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -28,6 +29,7 @@ class _LoginFormState extends State<LoginForm> {
 
   @override
   Widget build(BuildContext context) {
+    final loginProvider = context.read<LoginProvider>();
     return Container(
       padding: EdgeInsets.all(KSizes.md),
       decoration: BoxDecoration(
@@ -91,10 +93,13 @@ class _LoginFormState extends State<LoginForm> {
             //login button
             CustomButton(
               text: "Sign In",
-              onPressed: () {
+              onPressed: () async {
                 if (_loginKey.currentState!.validate()) {
-                  print(_emailController.text.trim());
-                  print(_passwordController.text.trim());
+                  await loginProvider.login(
+                    context,
+                    _emailController.text.trim(),
+                    _passwordController.text,
+                  );
                 }
               },
             ),

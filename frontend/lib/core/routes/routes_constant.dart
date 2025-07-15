@@ -1,9 +1,11 @@
 class RoutesConstant {
   static const String navigationMenu = "navigationMenu";
   static const String authWrapper = "authWrapper";
+  static const String splash = "splash";
   static const String login = "login";
   static const String signup = "signup";
   static const String otpVerify = "otpVerify";
+  static const String otpSuccess = "otpSuccess";
   static const String dashboard = "dashboard";
   static const String allStaff = "allStaff";
   static const String createIssue = "createIssue";

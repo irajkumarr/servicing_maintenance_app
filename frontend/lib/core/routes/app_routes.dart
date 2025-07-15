@@ -1,25 +1,48 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/common/widgets/success_screen/success.dart';
 import 'package:frontend/core/routes/routes_constant.dart';
 import 'package:frontend/features/authentication/screens/login/login.dart';
 import 'package:frontend/features/authentication/screens/signup/signup.dart';
+import 'package:frontend/features/authentication/screens/splash/splash.dart';
 import 'package:frontend/features/authentication/screens/verification/otp_verification.dart';
 import 'package:frontend/navigation_menu.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 class AppRoutes {
   late GoRouter router = GoRouter(
-    initialLocation: "/login",
+    initialLocation: "/",
     // initialLocation: "/navigationMenu",
     navigatorKey: navigatorKey,
 
     routes: [
+      // GoRoute(
+      //   name: RoutesConstant.authWrapper,
+      //   path: "/",
+      //   pageBuilder: (context, state) {
+      //     return MaterialPage(child: AuthWrapper());
+      //   },
+      // ),
+      GoRoute(
+        name: RoutesConstant.splash,
+        path: "/",
+        pageBuilder: (context, state) {
+          return MaterialPage(child: SplashScreen());
+        },
+      ),
       GoRoute(
         name: RoutesConstant.navigationMenu,
         path: "/navigationMenu",
         pageBuilder: (context, state) {
           return MaterialPage(child: NavigationMenu());
+        },
+        redirect: (context, state) async {
+          final prefs = await SharedPreferences.getInstance();
+          final token = prefs.getString('token');
+          if (token == null) return '/login';
+          return null;
         },
       ),
       GoRoute(
@@ -40,7 +63,15 @@ class AppRoutes {
         name: RoutesConstant.otpVerify,
         path: "/otpVerify",
         pageBuilder: (context, state) {
-          return MaterialPage(child: OtpVerificationScreen());
+          final email = state.extra as String;
+          return MaterialPage(child: OtpVerificationScreen(email: email));
+        },
+      ),
+      GoRoute(
+        name: RoutesConstant.otpSuccess,
+        path: "/otpSuccess",
+        pageBuilder: (context, state) {
+          return MaterialPage(child: SuccessScreen());
         },
       ),
     ],

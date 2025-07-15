@@ -1,108 +1,88 @@
-// import 'package:flutter/material.dart';
-// import 'package:flutter_screenutil/flutter_screenutil.dart';
-// import 'package:frontend/core/routes/routes_constant.dart';
-// import 'package:go_router/go_router.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:frontend/core/utils/circular_progress_indicator/custom_loading.dart';
+import 'package:go_router/go_router.dart';
+import 'package:lottie/lottie.dart';
 
-// import 'package:lottie/lottie.dart';
+import '../../../core/routes/routes_constant.dart';
+import '../../../core/utils/constants/colors.dart';
+import '../../../core/utils/constants/image_strings.dart';
+import '../../../core/utils/constants/sizes.dart';
 
-// import '../../../core/utils/constants/colors.dart';
-// import '../../../core/utils/constants/image_strings.dart';
-// import '../../../core/utils/constants/sizes.dart';
-// import '../../../core/utils/helpers/helper_functions.dart';
+class SuccessScreen extends StatefulWidget {
+  const SuccessScreen({super.key});
 
-// class SuccessScreen extends StatelessWidget {
-//   // final String imagePath;
-//   // final String title;
-//   // final String subTitle;
-//   // final VoidCallback onPressed;
-//   const SuccessScreen({
-//     super.key,
-//     // required this.imagePath,
-//     // required this.title,
-//     // required this.subTitle,
-//     // required this.onPressed,
-//   });
+  @override
+  State<SuccessScreen> createState() => _SuccessScreenState();
+}
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return PopScope(
-//       canPop: false,
-//       child: Scaffold(
-//         body: Padding(
-//           // padding: KSpacingStyle.paddingWithAppbar() * 2,
-//           padding: EdgeInsets.symmetric(
-//               horizontal: KSizes.md, vertical: KSizes.spaceBtwSections),
-//           child: Column(
-//             children: [
-//               Lottie.asset(KImages.successfullyRegisterAnimation,
-//                   width: KHelperFunctions.screenWidth(context) * 0.6),
-//               SizedBox(
-//                 height: KSizes.spaceBtwItems,
-//               ),
-//               Text(
-//                 "Payment success",
-//                 style: Theme.of(context).textTheme.bodyLarge,
-//                 textAlign: TextAlign.center,
-//               ),
-//               SizedBox(
-//                 height: KSizes.spaceBtwItems,
-//               ),
-//               Text(
-//                 "Your order was placed successfully.",
-//                 style: Theme.of(context).textTheme.titleSmall,
-//                 textAlign: TextAlign.center,
-//               ),
-//               SizedBox(
-//                 height: KSizes.spaceBtwSections * 3,
-//               ),
-//               SizedBox(
-//                 width: double.infinity - 20.w,
-//                 child: ElevatedButton(
-//                   style: ElevatedButton.styleFrom(
-//                       backgroundColor: KColors.primary,
-//                       shape: RoundedRectangleBorder(
-//                         borderRadius: BorderRadius.circular(KSizes.xs),
-//                       )),
-//                   onPressed: () {
-//                     // context.replaceNamed(RoutesConstant.navigationMenu);
+class _SuccessScreenState extends State<SuccessScreen> {
+  @override
+  void initState() {
+    super.initState();
+    // Auto-redirect to login after delay
+    Future.delayed(const Duration(seconds: 3), () {
+      if (mounted) {
+        context.goNamed(RoutesConstant.login);
+      }
+    });
+  }
 
-//                     // context.read<NavigationProvider>().onTap(4);
-//                   },
-//                   child: Text(
-//                     "See your orders",
-//                     style: Theme.of(context)
-//                         .textTheme
-//                         .bodyMedium!
-//                         .copyWith(color: KColors.white),
-//                   ),
-//                 ),
-//               ),
-//               SizedBox(height: KSizes.spaceBtwItems),
-//               SizedBox(
-//                 width: double.infinity - 20.w,
-//                 child: ElevatedButton(
-//                   style: ElevatedButton.styleFrom(
-//                       backgroundColor: KColors.darkGrey,
-//                       shape: RoundedRectangleBorder(
-//                         borderRadius: BorderRadius.circular(KSizes.xs),
-//                       )),
-//                   onPressed: () {
-//                     // context.read<NavigationProvider>().onTap(0);
-//                     // context.replaceNamed(RoutesConstant.navigationMenu);
-//                   },
-//                   child: Text(
-//                     "Back to home",
-//                     style: Theme.of(context)
-//                         .textTheme
-//                         .bodyMedium!
-//                         .copyWith(color: KColors.white),
-//                   ),
-//                 ),
-//               ),
-//             ],
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: KColors.white,
+      body: Center(
+        child: Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: KSizes.lg,
+            vertical: KSizes.spaceBtwSections,
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              // ✅ Lottie animation
+              Lottie.asset(
+                KImages.successfullyRegisterAnimation,
+                height: 200.h,
+                repeat: false,
+              ),
+
+              SizedBox(height: KSizes.spaceBtwSections),
+
+              // ✅ Success Text
+              Text(
+                "Verification Successful!",
+                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                  fontWeight: FontWeight.bold,
+                  color: KColors.success,
+                ),
+                textAlign: TextAlign.center,
+              ),
+
+              SizedBox(height: KSizes.spaceBtwItems),
+
+              Text(
+                "Your account has been successfully verified. You can now login to continue.",
+                style: Theme.of(context).textTheme.bodyMedium,
+                textAlign: TextAlign.center,
+              ),
+
+              SizedBox(height: KSizes.spaceBtwSections * 2),
+
+              // ✅ Optional Progress Indicator + Redirect Message
+              CustomLoading(color: KColors.primary),
+              SizedBox(height: 12),
+              Text(
+                "Redirecting to login...",
+                style: Theme.of(
+                  context,
+                ).textTheme.labelMedium?.copyWith(color: KColors.darkGrey),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}

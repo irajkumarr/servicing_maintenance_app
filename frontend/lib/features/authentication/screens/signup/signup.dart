@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:frontend/common/widgets/loaders/full_screen_overlay.dart';
 import 'package:frontend/core/utils/constants/sizes.dart';
+import 'package:frontend/features/authentication/providers/signup_provider.dart';
 import 'package:frontend/features/authentication/screens/signup/widgets/signup_footer.dart';
 import 'package:frontend/features/authentication/screens/signup/widgets/signup_form.dart';
+import 'package:provider/provider.dart';
 
 class SignupScreen extends StatelessWidget {
   const SignupScreen({super.key});
@@ -31,21 +34,24 @@ class SignupScreen extends StatelessWidget {
           ],
         ),
       ),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: KSizes.md,
-              vertical: KSizes.spaceBtwSections,
-            ),
-            child: Column(
-              children: [
-                //sign up form
-                SignupForm(),
-                SizedBox(height: KSizes.defaultSpace),
-                //signup footer
-                SignupFooter(),
-              ],
+      body: FullScreenOverlay(
+        isLoading: context.watch<SignupProvider>().isLoading,
+        child: SafeArea(
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: KSizes.md,
+                vertical: KSizes.spaceBtwSections,
+              ),
+              child: Column(
+                children: [
+                  //sign up form
+                  SignupForm(),
+                  SizedBox(height: KSizes.defaultSpace),
+                  //signup footer
+                  SignupFooter(),
+                ],
+              ),
             ),
           ),
         ),
