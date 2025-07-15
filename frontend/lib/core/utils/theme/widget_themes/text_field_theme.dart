@@ -12,13 +12,20 @@ class KTextFormFieldTheme {
 
     suffixIconColor: KColors.darkGrey,
     // constraints: const BoxConstraints.expand(height: TSizes.inputFieldHeight),
-    labelStyle: const TextStyle()
-        .copyWith(fontSize: KSizes.fontSizeSm, color: KColors.darkGrey),
-    hintStyle: const TextStyle()
-        .copyWith(fontSize: KSizes.fontSizeMd, color: KColors.black),
+    labelStyle: const TextStyle().copyWith(
+      fontSize: KSizes.fontSizeSm,
+      color: KColors.darkGrey,
+    ),
+    hintStyle: const TextStyle().copyWith(
+      fontSize: KSizes.fontSizeSm,
+      fontWeight: FontWeight.w400,
+      color: KColors.darkGrey,
+    ),
     errorStyle: const TextStyle().copyWith(fontStyle: FontStyle.normal),
-    floatingLabelStyle: const TextStyle()
-        .copyWith(color: KColors.primary, fontSize: KSizes.fontSizeSm),
+    floatingLabelStyle: const TextStyle().copyWith(
+      color: KColors.primary,
+      fontSize: KSizes.fontSizeSm,
+    ),
     border: const OutlineInputBorder().copyWith(
       borderRadius: BorderRadius.circular(KSizes.inputFieldRadius),
       borderSide: const BorderSide(width: 1.3, color: KColors.lightBackground),
@@ -50,12 +57,17 @@ class KTextFormFieldTheme {
     prefixIconColor: KColors.darkGrey,
     suffixIconColor: KColors.darkGrey,
     // constraints: const BoxConstraints.expand(height: TSizes.inputFieldHeight),
-    labelStyle: const TextStyle()
-        .copyWith(fontSize: KSizes.fontSizeMd, color: KColors.white),
-    hintStyle: const TextStyle()
-        .copyWith(fontSize: KSizes.fontSizeSm, color: KColors.white),
-    floatingLabelStyle:
-        const TextStyle().copyWith(color: KColors.white.withOpacity(0.8)),
+    labelStyle: const TextStyle().copyWith(
+      fontSize: KSizes.fontSizeMd,
+      color: KColors.white,
+    ),
+    hintStyle: const TextStyle().copyWith(
+      fontSize: KSizes.fontSizeSm,
+      color: KColors.white,
+    ),
+    floatingLabelStyle: const TextStyle().copyWith(
+      color: KColors.white.withOpacity(0.8),
+    ),
     border: const OutlineInputBorder().copyWith(
       borderRadius: BorderRadius.circular(KSizes.inputFieldRadius),
       borderSide: const BorderSide(width: 1, color: KColors.darkGrey),

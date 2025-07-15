@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/core/routes/routes_constant.dart';
+import 'package:frontend/features/authentication/screens/login/login.dart';
+import 'package:frontend/features/authentication/screens/signup/signup.dart';
 import 'package:frontend/navigation_menu.dart';
 import 'package:go_router/go_router.dart';
 
@@ -7,8 +9,8 @@ final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 class AppRoutes {
   late GoRouter router = GoRouter(
-    // initialLocation: "/login",
-    initialLocation: "/navigationMenu",
+    initialLocation: "/login",
+    // initialLocation: "/navigationMenu",
     navigatorKey: navigatorKey,
 
     routes: [
@@ -17,6 +19,20 @@ class AppRoutes {
         path: "/navigationMenu",
         pageBuilder: (context, state) {
           return MaterialPage(child: NavigationMenu());
+        },
+      ),
+      GoRoute(
+        name: RoutesConstant.login,
+        path: "/login",
+        pageBuilder: (context, state) {
+          return MaterialPage(child: LoginScreen());
+        },
+      ),
+      GoRoute(
+        name: RoutesConstant.signup,
+        path: "/signup",
+        pageBuilder: (context, state) {
+          return MaterialPage(child: SignupScreen());
         },
       ),
     ],

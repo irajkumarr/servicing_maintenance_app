@@ -30,7 +30,8 @@ class CustomButton extends StatelessWidget {
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
           backgroundColor: color,
-          splashFactory: NoSplash.splashFactory,
+
+          // splashFactory: NoSplash.splashFactory,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(KSizes.sm),
           ),

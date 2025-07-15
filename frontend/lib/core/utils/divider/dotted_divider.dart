@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_dash/flutter_dash.dart';
 import 'package:frontend/core/utils/constants/colors.dart';
@@ -6,9 +5,7 @@ import 'package:frontend/core/utils/constants/sizes.dart';
 import 'package:frontend/core/utils/device/device_utility.dart';
 
 class DottedDivider extends StatelessWidget {
-  const DottedDivider({
-    super.key,
-  });
+  const DottedDivider({super.key});
 
   @override
   Widget build(BuildContext context) {

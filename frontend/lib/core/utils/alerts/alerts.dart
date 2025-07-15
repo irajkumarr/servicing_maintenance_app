@@ -17,7 +17,7 @@ class KAlerts {
       barrierDismissible: true, // user must tap button!
       builder: (BuildContext context) {
         return AlertDialog(
-          title: SvgPicture.asset(KImages.logo2, width: 100, height: 100),
+          title: SvgPicture.asset(KImages.logo, width: 100, height: 100),
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[

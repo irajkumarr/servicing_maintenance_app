@@ -14,7 +14,7 @@ class LabelText extends StatelessWidget {
         title,
         style: Theme.of(
           context,
-        ).textTheme.titleMedium!.copyWith(color: textColor),
+        ).textTheme.bodyLarge!.copyWith(color: textColor),
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
       ),

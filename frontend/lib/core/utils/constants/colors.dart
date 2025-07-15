@@ -4,13 +4,14 @@ class KColors {
   // Color(0xFFFF9838),
   // App theme colors
   // static const Color primary = Color(0xffF3A92E);
-  static const Color primary = Color(0xffFAA026);
+  // static const Color primary = Color(0xffFAA026);
+  static const Color primary = Color(0xff236787);
   // static const Color secondary = Color(0xFFf6dde0);
   // static const Color secondary = Color.fromARGB(255, 248, 195, 201);
   static const Color secondary = Color(0xFFFEF5E6);
   // static const Color secondary = Color(0xFFc23844);
   static const Color accent = Color(0xFFFAD79F);
-//Color(0xFFb0c7ff);
+  //Color(0xFFb0c7ff);
   // Text colors
   static const Color textPrimary = Color(0xFF333333);
   static const Color textSecondary = Color(0xFF6C757D);
@@ -37,7 +38,7 @@ class KColors {
   static const Color buttonPrimary = Color(0xFFB21031);
   static const Color buttonSecondary = Color(0xFF6C757D);
   static const Color buttonDisabled = Color(0xFFE0E3E8);
-// Color(0xFFC4C4C4)
+  // Color(0xFFC4C4C4)
   // Border colors
   static const Color borderPrimary = Color(0xFFD9D9D9);
   static const Color borderSecondary = Color(0xFFE6E6E6);
