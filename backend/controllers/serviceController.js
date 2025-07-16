@@ -179,7 +179,7 @@ const handleDeleteService = async (req, res) => {
 
 const handleGetTopRatedServices = async (req, res) => {
   try {
-    const limit = parseInt(req.query.limit) || 5; // default: top 5
+    const limit = parseInt(req.query.limit) || 4; // default: top 4
 
     const topServices = await Service.find({ isActive: true })
       .sort({ rating: -1, reviewCount: -1 })
@@ -205,8 +205,7 @@ const handleRateService = async (req, res) => {
 
   const userId = req.user.id;
   try {
-
-     if (req.user.role !== "user") {
+    if (req.user.role !== "user") {
       return res.status(403).json({
         status: false,
         message: "Only users are allowed to rate services.",

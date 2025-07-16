@@ -50,7 +50,7 @@ class _SplashScreenState extends State<SplashScreen> {
               width: 250.w,
               child: Image.asset(KImages.logo, fit: BoxFit.contain),
             ),
-            SizedBox(height: KSizes.spaceBtwSections),
+            SizedBox(height: KSizes.spaceBtwSections * 3),
             CustomLoading(color: KColors.primary),
           ],
         ),

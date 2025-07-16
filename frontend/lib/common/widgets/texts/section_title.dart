@@ -12,8 +12,10 @@ class SectionTitle extends StatelessWidget {
     this.textColor,
     this.buttonColor = KColors.primary,
     this.onPressed,
+    this.buttonTitle = "View All",
   });
   final String title;
+  final String buttonTitle;
   final bool showButtonTitle;
   final Color? textColor;
   final Color? buttonColor;
@@ -29,7 +31,7 @@ class SectionTitle extends StatelessWidget {
           style: Theme.of(context).textTheme.headlineSmall!.copyWith(
             fontWeight: FontWeight.w700,
             color: textColor,
-            fontSize: 22.sp,
+            fontSize: 21.sp,
           ),
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
@@ -37,11 +39,12 @@ class SectionTitle extends StatelessWidget {
         if (showButtonTitle)
           InkWell(
             onTap: onPressed,
+            borderRadius: BorderRadius.circular(KSizes.md),
             child: Padding(
               padding: EdgeInsets.all(KSizes.xs),
               child: Text(
-                "View all",
-                style: Theme.of(context).textTheme.labelMedium!.copyWith(
+                buttonTitle,
+                style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                   color: buttonColor,
                   fontWeight: FontWeight.w600,
                 ),
