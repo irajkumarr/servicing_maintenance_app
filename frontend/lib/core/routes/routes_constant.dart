@@ -7,7 +7,7 @@ class RoutesConstant {
   static const String otpVerify = "otpVerify";
   static const String otpSuccess = "otpSuccess";
   static const String home = "home";
-  static const String allStaff = "allStaff";
+  static const String book = "book";
   static const String createIssue = "createIssue";
   static const String room = "room";
   static const String changeRoom = "changeRoom";

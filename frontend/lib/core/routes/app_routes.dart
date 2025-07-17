@@ -6,6 +6,7 @@ import 'package:frontend/features/authentication/screens/signup/signup.dart';
 import 'package:frontend/features/authentication/screens/splash/splash.dart';
 import 'package:frontend/features/authentication/screens/verification/otp_verification.dart';
 import 'package:frontend/features/dashboard/screens/home/home.dart';
+import 'package:frontend/features/dashboard/screens/service/service_booking_screen.dart';
 import 'package:frontend/navigation_menu.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -80,6 +81,16 @@ class AppRoutes {
         path: "/home",
         pageBuilder: (context, state) {
           return MaterialPage(child: HomeScreen());
+        },
+      ),
+      GoRoute(
+        name: RoutesConstant.book,
+        path: "/book",
+        pageBuilder: (context, state) {
+          final serviceId = state.extra as String;
+          return MaterialPage(
+            child: ServiceBookingScreen(serviceId: serviceId),
+          );
         },
       ),
     ],

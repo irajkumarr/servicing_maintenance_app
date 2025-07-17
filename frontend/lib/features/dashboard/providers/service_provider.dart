@@ -23,12 +23,11 @@ class ServiceProvider with ChangeNotifier {
   bool get isLoading => _isLoading;
 
   ErrorModel? get error => _error;
-bool _hasFetchedTopRated = false;
+  bool _hasFetchedTopRated = false;
   bool get hasFetchedTopRated => _hasFetchedTopRated;
-  
 
   Future<void> fetchTopRatedServices() async {
-     if (_hasFetchedTopRated) return;
+    if (_hasFetchedTopRated) return;
     _isLoading = true;
     _error = null;
     notifyListeners();
@@ -47,7 +46,7 @@ bool _hasFetchedTopRated = false;
 
       if (response.statusCode == 200) {
         _topRatedServices = serviceModelFromJson(response.body);
-          _hasFetchedTopRated = true;
+        _hasFetchedTopRated = true;
         _error = null; // No error
       } else {
         final errorBody = json.decode(response.body);
@@ -67,8 +66,6 @@ bool _hasFetchedTopRated = false;
   List<ServiceModel> _services = [];
 
   List<ServiceModel> get services => _services;
-
-  
 
   Future<void> fetchServices() async {
     _isLoading = true;
@@ -99,6 +96,44 @@ bool _hasFetchedTopRated = false;
     } catch (e) {
       _error = ErrorModel(status: false, message: e.toString());
       _services = [];
+    } finally {
+      _isLoading = false;
+      notifyListeners();
+    }
+  }
+
+  ServiceModel? _service;
+
+  ServiceModel? get service => _service;
+
+  Future<void> fetchServiceById(String serviceId) async {
+    _isLoading = true;
+    _error = null;
+
+    notifyListeners();
+
+    try {
+      final response = await http.get(
+        Uri.parse("$kAppBaseUrl/api/services/$serviceId"),
+      );
+
+      if (response.statusCode == 200) {
+        final jsonData = jsonDecode(response.body);
+        _service = ServiceModel.fromJson(jsonData);
+        // _job = JobModel.fromJson(jsonData);
+
+        _error = null; // No error
+      } else {
+        _error = ErrorModel(
+          status: false,
+          message: "Failed to load service $serviceId.",
+        );
+        print(_error?.toJson());
+        _service = null;
+      }
+    } catch (e) {
+      _error = ErrorModel(status: false, message: e.toString());
+      _service = null;
     } finally {
       _isLoading = false;
       notifyListeners();
