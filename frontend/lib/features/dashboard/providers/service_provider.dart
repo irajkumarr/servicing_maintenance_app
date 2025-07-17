@@ -63,4 +63,45 @@ bool _hasFetchedTopRated = false;
       notifyListeners();
     }
   }
+
+  List<ServiceModel> _services = [];
+
+  List<ServiceModel> get services => _services;
+
+  
+
+  Future<void> fetchServices() async {
+    _isLoading = true;
+    _error = null;
+    notifyListeners();
+    final prefs = await SharedPreferences.getInstance();
+    final token = prefs.getString('token');
+
+    if (token == null) return;
+    try {
+      final response = await http.get(
+        Uri.parse('$kAppBaseUrl/api/services/'),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $token',
+        },
+      );
+
+      if (response.statusCode == 200) {
+        _services = serviceModelFromJson(response.body);
+        _error = null; // No error
+      } else {
+        final errorBody = json.decode(response.body);
+        final errorMessage = errorBody['message'];
+        _error = ErrorModel(status: false, message: errorMessage);
+        _services = [];
+      }
+    } catch (e) {
+      _error = ErrorModel(status: false, message: e.toString());
+      _services = [];
+    } finally {
+      _isLoading = false;
+      notifyListeners();
+    }
+  }
 }

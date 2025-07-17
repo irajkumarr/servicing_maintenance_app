@@ -19,7 +19,10 @@ class VehicleSelectionCard extends StatelessWidget {
 
       borderRadius: BorderRadius.circular(8),
       child: Container(
-        padding: EdgeInsets.all(KSizes.md),
+        padding: EdgeInsets.symmetric(
+          horizontal: KSizes.md,
+          vertical: KSizes.sm + 3,
+        ),
         decoration: BoxDecoration(
           color: Colors.transparent,
           borderRadius: BorderRadius.circular(8),
