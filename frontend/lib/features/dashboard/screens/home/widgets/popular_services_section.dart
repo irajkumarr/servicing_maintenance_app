@@ -1,21 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:frontend/common/widgets/texts/label_text.dart';
 import 'package:frontend/common/widgets/texts/section_title.dart';
 import 'package:frontend/core/utils/circular_progress_indicator/custom_loading.dart';
 import 'package:frontend/core/utils/constants/colors.dart';
 import 'package:frontend/core/utils/constants/sizes.dart';
-import 'package:frontend/core/utils/device/device_utility.dart';
-import 'package:frontend/core/utils/shimmers/food_tile_vertical_shimmer.dart';
-import 'package:frontend/core/utils/shimmers/room_shimmer.dart';
 import 'package:frontend/data/models/service_model.dart' as serviceModel;
 import 'package:frontend/features/dashboard/providers/service_provider.dart';
-import 'package:frontend/features/dashboard/screens/home/widgets/home_appbar.dart';
-import 'package:frontend/features/dashboard/screens/home/widgets/home_search_bar.dart';
 import 'package:frontend/features/dashboard/screens/home/widgets/service_card.dart';
-import 'package:frontend/features/dashboard/screens/home/widgets/vehicle_selection_card.dart';
-import 'package:frontend/features/dashboard/screens/home/widgets/vehicle_selection_section.dart';
-import 'package:icons_plus/icons_plus.dart';
 import 'package:provider/provider.dart';
 
 class PopularServicesSection extends StatefulWidget {

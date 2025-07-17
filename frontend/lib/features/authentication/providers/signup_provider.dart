@@ -5,7 +5,6 @@ import 'package:frontend/core/utils/constants/api_constants.dart';
 import 'package:frontend/core/utils/constants/colors.dart';
 import 'package:frontend/data/models/error_model.dart';
 import 'package:frontend/data/models/success_model.dart';
-import 'package:frontend/data/models/user_model.dart';
 import 'package:go_router/go_router.dart';
 import 'package:http/http.dart' as http;
 

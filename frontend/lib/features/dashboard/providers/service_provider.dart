@@ -1,16 +1,9 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
-import 'package:frontend/common/widgets/alert_box/snackbar.dart';
-import 'package:frontend/core/routes/app_routes.dart';
-import 'package:frontend/core/routes/routes_constant.dart';
 import 'package:frontend/core/utils/constants/api_constants.dart';
-import 'package:frontend/core/utils/constants/colors.dart';
 import 'package:frontend/data/models/error_model.dart';
 import 'package:frontend/data/models/service_model.dart';
-import 'package:frontend/data/models/success_model.dart';
-import 'package:go_router/go_router.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/common/widgets/alert_box/alert_box.dart';
-import 'package:frontend/core/network/connectivity_checker.dart';
 import 'package:frontend/core/utils/constants/colors.dart';
 import 'package:frontend/features/authentication/providers/login_provider.dart';
 import 'package:frontend/features/dashboard/screens/home/home.dart';

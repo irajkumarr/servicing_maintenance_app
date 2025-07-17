@@ -8,7 +8,6 @@ import 'package:frontend/core/utils/constants/sizes.dart';
 import 'package:frontend/features/authentication/providers/signup_provider.dart';
 import 'package:frontend/features/authentication/providers/timer_provider.dart';
 import 'package:go_router/go_router.dart';
-import 'package:icons_plus/icons_plus.dart';
 import 'package:pinput/pinput.dart';
 import 'package:provider/provider.dart';
 
