@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:frontend/core/utils/constants/api_constants.dart';
 import 'package:frontend/data/models/address_model.dart';
 import 'package:frontend/data/models/error_model.dart';
-import 'package:frontend/data/models/vehicle_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:http/http.dart' as http;
