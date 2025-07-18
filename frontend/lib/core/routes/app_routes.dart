@@ -16,8 +16,8 @@ final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 class AppRoutes {
   late GoRouter router = GoRouter(
-    // initialLocation: "/",
-    initialLocation: "/navigationMenu",
+    initialLocation: "/bookConfirm",
+    // initialLocation: "/navigationMenu",
     navigatorKey: navigatorKey,
 
     routes: [

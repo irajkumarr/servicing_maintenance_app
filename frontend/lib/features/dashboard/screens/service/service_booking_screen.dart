@@ -690,61 +690,6 @@ class _ServiceBookingScreenState extends State<ServiceBookingScreen> {
 
                     SizedBox(height: 24),
 
-                    // // Service Location
-                    // Text(
-                    //   'Service Location',
-                    //   style: TextStyle(
-                    //     fontSize: 18,
-                    //     fontWeight: FontWeight.w600,
-                    //   ),
-                    // ),
-                    // SizedBox(height: 12),
-
-                    // Container(
-                    //   padding: EdgeInsets.all(16),
-                    //   decoration: BoxDecoration(
-                    //     color: Colors.white,
-                    //     borderRadius: BorderRadius.circular(12),
-                    //     border: Border.all(color: Colors.grey[300]!),
-                    //   ),
-                    //   child: Row(
-                    //     children: [
-                    //       Icon(Icons.location_on, color: Colors.grey[600]),
-                    //       SizedBox(width: 12),
-                    //       Expanded(
-                    //         child: Column(
-                    //           crossAxisAlignment: CrossAxisAlignment.start,
-                    //           children: [
-                    //             Text(
-                    //               address?.label ?? "",
-                    //               style: TextStyle(
-                    //                 fontSize: 16,
-                    //                 fontWeight: FontWeight.w600,
-                    //               ),
-                    //             ),
-                    //             Text(
-                    //               address?.fullAddress ?? "",
-                    //               style: TextStyle(
-                    //                 color: Colors.grey[600],
-                    //                 fontSize: 14,
-                    //               ),
-                    //             ),
-                    //           ],
-                    //         ),
-                    //       ),
-                    //       TextButton(
-                    //         onPressed: () {},
-                    //         child: Text(
-                    //           'Change',
-                    //           style: TextStyle(
-                    //             color: KColors.primary,
-                    //             fontWeight: FontWeight.w500,
-                    //           ),
-                    //         ),
-                    //       ),
-                    //     ],
-                    //   ),
-                    // ),
                     // Service Location
                     Text(
                       'Service Location',
