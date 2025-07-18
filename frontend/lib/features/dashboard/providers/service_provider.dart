@@ -104,19 +104,28 @@ class ServiceProvider with ChangeNotifier {
     _error = null;
 
     notifyListeners();
+    final prefs = await SharedPreferences.getInstance();
+    final token = prefs.getString('token');
 
+    if (token == null) return;
     try {
       final response = await http.get(
         Uri.parse("$kAppBaseUrl/api/services/$serviceId"),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $token',
+        },
       );
 
       if (response.statusCode == 200) {
         final jsonData = jsonDecode(response.body);
         _service = ServiceModel.fromJson(jsonData);
-        // _job = JobModel.fromJson(jsonData);
+        _service = ServiceModel.fromJson(jsonData);
 
         _error = null; // No error
       } else {
+        print("Status Code: ${response.statusCode}");
+        print("Response Body: ${response.body}");
         _error = ErrorModel(
           status: false,
           message: "Failed to load service $serviceId.",

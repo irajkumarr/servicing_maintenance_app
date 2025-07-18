@@ -15,7 +15,7 @@ class ServiceCard extends StatelessWidget {
     return InkWell(
       borderRadius: BorderRadius.circular(KSizes.sm),
       onTap: () {
-        context.pushNamed(RoutesConstant.book);
+        context.pushNamed(RoutesConstant.book, extra: service.id);
       },
       child: Container(
         padding: EdgeInsets.all(KSizes.md),

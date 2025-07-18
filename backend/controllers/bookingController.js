@@ -60,7 +60,7 @@ const handleCreateBooking = async (req, res) => {
     });
 
     await booking.save();
-    res.status(201).json({ status: true, message: "Booking created" });
+    res.status(201).json({ status: true, message: "Booking Confirmed!" });
   } catch (error) {
     res.status(500).json({ status: false, message: error.message });
   }
