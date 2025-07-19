@@ -49,32 +49,21 @@ class _HomeAppBarState extends State<HomeAppBar> {
               ),
             ),
             const SizedBox(height: 2),
-            Row(
-              children: [
-                Icon(
-                  Icons.location_on,
-                  color: KColors.darkerGrey,
-                  size: KSizes.iconSm,
-                ),
-                const SizedBox(width: 4),
-                Expanded(
-                  child:
-                      address == null ||
-                          address.fullAddress == null ||
-                          address.fullAddress!.isEmpty ||
-                          addressProvider.isLoading
-                      ? Text(
-                          "Loading...",
-                          style: Theme.of(context).textTheme.bodyLarge!
-                              .copyWith(
-                                // color: KColors.white,
-                                color: KColors.darkerGrey,
-
-                                fontStyle: FontStyle.italic,
-                              ),
-                          overflow: TextOverflow.ellipsis,
-                        )
-                      : Text(
+            address == null ||
+                    address.fullAddress == null ||
+                    address.fullAddress!.isEmpty ||
+                    addressProvider.isLoading
+                ? SizedBox()
+                : Row(
+                    children: [
+                      Icon(
+                        Icons.location_on,
+                        color: KColors.darkerGrey,
+                        size: KSizes.iconSm,
+                      ),
+                      const SizedBox(width: 4),
+                      Expanded(
+                        child: Text(
                           "${address.fullAddress}",
                           style: Theme.of(context).textTheme.bodyLarge!
                               .copyWith(
@@ -85,9 +74,9 @@ class _HomeAppBarState extends State<HomeAppBar> {
                               ),
                           overflow: TextOverflow.ellipsis,
                         ),
-                ),
-              ],
-            ),
+                      ),
+                    ],
+                  ),
           ],
         ),
       ),
