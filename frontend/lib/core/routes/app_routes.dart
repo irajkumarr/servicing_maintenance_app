@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/common/widgets/success_screen/success.dart';
 import 'package:frontend/core/routes/routes_constant.dart';
-import 'package:frontend/data/models/address_model.dart';
 import 'package:frontend/data/models/booking_model.dart';
-import 'package:frontend/data/models/service_model.dart';
-import 'package:frontend/data/models/vehicle_model.dart';
 import 'package:frontend/features/authentication/screens/login/login.dart';
 import 'package:frontend/features/authentication/screens/signup/signup.dart';
 import 'package:frontend/features/authentication/screens/splash/splash.dart';

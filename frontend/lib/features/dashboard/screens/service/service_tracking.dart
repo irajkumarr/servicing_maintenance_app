@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:frontend/core/utils/constants/colors.dart';
 import 'package:frontend/core/utils/constants/sizes.dart';
-import 'package:frontend/core/utils/device/device_utility.dart';
 import 'package:frontend/data/models/booking_model.dart';
-import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -558,86 +556,6 @@ class _ServiceTrackingScreenState extends State<ServiceTrackingScreen>
     );
   }
 
-  Widget _buildActionButtons() {
-    return Row(
-      children: [
-        Expanded(
-          child: OutlinedButton.icon(
-            onPressed: () {
-              _showCancelDialog();
-            },
-            icon: Icon(Icons.cancel_outlined),
-            label: Text("Cancel Service"),
-            style: OutlinedButton.styleFrom(
-              padding: EdgeInsets.symmetric(vertical: 16),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
-              side: BorderSide(color: Colors.red[400]!),
-              foregroundColor: Colors.red[600],
-            ),
-          ),
-        ),
-
-        SizedBox(width: KSizes.sm),
-
-        Expanded(
-          child: ElevatedButton.icon(
-            onPressed: () {
-              // Handle support
-            },
-            icon: Icon(Icons.support_agent),
-            label: Text("Get Help"),
-            style: ElevatedButton.styleFrom(
-              backgroundColor: KColors.black,
-              foregroundColor: Colors.white,
-              padding: EdgeInsets.symmetric(vertical: 16),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-
-  void _showCancelDialog() {
-    showDialog(
-      context: context,
-      builder: (context) => SizedBox(
-        width: KDeviceUtils.getScreenWidth(context),
-        child: AlertDialog(
-          backgroundColor: KColors.white,
-          insetPadding: EdgeInsets.symmetric(horizontal: 30.w),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(KSizes.xs),
-          ),
-          title: Text("Cancel Service?"),
-          content: Text(
-            "Are you sure you want to cancel this service? This action cannot be undone.",
-          ),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(context),
-              child: Text("Keep Service"),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                context.pop();
-                // Handle cancel service
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.red[600],
-                foregroundColor: Colors.white,
-              ),
-              child: Text("Cancel Service"),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
 
   Widget _buildProviderInfoCard() {
     return Container(

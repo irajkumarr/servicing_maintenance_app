@@ -9,7 +9,6 @@ import 'package:frontend/data/models/address_model.dart';
 import 'package:frontend/data/models/booking_model.dart';
 import 'package:frontend/data/models/error_model.dart';
 import 'package:frontend/data/models/service_model.dart';
-import 'package:frontend/data/models/success_model.dart';
 import 'package:frontend/data/models/vehicle_model.dart';
 import 'package:frontend/navigation_menu.dart';
 import 'package:go_router/go_router.dart';
