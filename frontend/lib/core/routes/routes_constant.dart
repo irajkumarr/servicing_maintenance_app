@@ -9,7 +9,7 @@ class RoutesConstant {
   static const String home = "home";
   static const String book = "book";
   static const String bookConfirm = "bookConfirm";
-  static const String room = "room";
+  static const String track = "track";
   static const String changeRoom = "changeRoom";
   static const String request = "request";
   static const String createStaff = "createStaff";

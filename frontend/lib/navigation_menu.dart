@@ -4,6 +4,7 @@ import 'package:frontend/core/utils/constants/colors.dart';
 import 'package:frontend/features/authentication/providers/login_provider.dart';
 import 'package:frontend/features/dashboard/screens/home/home.dart';
 import 'package:frontend/features/dashboard/screens/service/service.dart';
+import 'package:frontend/features/dashboard/screens/service/service_history.dart';
 import 'package:icons_plus/icons_plus.dart';
 // import 'package:iconsax/iconsax.dart';
 import 'package:provider/provider.dart';
@@ -92,7 +93,7 @@ class NavigationProvider with ChangeNotifier {
   List<Widget> screens = [
     HomeScreen(),
     ServiceScreen(),
-    Container(color: Colors.pink),
+    ServiceHistoryScreen(),
     Container(color: Colors.purple),
   ];
 

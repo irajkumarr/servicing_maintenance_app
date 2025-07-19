@@ -177,4 +177,43 @@ class BookingProvider with ChangeNotifier {
       notifyListeners();
     }
   }
+
+  List<BookingModel> _bookings = [];
+
+  List<BookingModel> get bookings => _bookings;
+
+  Future<void> fetchUserBookings() async {
+    _isLoading = true;
+    _error = null;
+    notifyListeners();
+    final prefs = await SharedPreferences.getInstance();
+    final token = prefs.getString('token');
+
+    if (token == null) return;
+    try {
+      final response = await http.get(
+        Uri.parse('$kAppBaseUrl/api/bookings/user'),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $token',
+        },
+      );
+
+      if (response.statusCode == 200) {
+        _bookings = bookingModelFromJson(response.body);
+        _error = null; // No error
+      } else {
+        final errorBody = json.decode(response.body);
+        final errorMessage = errorBody['message'];
+        _error = ErrorModel(status: false, message: errorMessage);
+        _bookings = [];
+      }
+    } catch (e) {
+      _error = ErrorModel(status: false, message: e.toString());
+      _bookings = [];
+    } finally {
+      _isLoading = false;
+      notifyListeners();
+    }
+  }
 }

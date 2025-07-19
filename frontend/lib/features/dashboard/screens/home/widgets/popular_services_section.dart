@@ -6,6 +6,7 @@ import 'package:frontend/core/utils/constants/sizes.dart';
 import 'package:frontend/data/models/service_model.dart' as serviceModel;
 import 'package:frontend/features/dashboard/providers/service_provider.dart';
 import 'package:frontend/features/dashboard/screens/home/widgets/service_card.dart';
+import 'package:frontend/navigation_menu.dart';
 import 'package:provider/provider.dart';
 
 class PopularServicesSection extends StatefulWidget {
@@ -37,7 +38,9 @@ class _PopularServicesSectionState extends State<PopularServicesSection> {
           showButtonTitle: true,
           buttonTitle: "View All",
           buttonColor: KColors.black,
-          onPressed: () {},
+          onPressed: () {
+            context.read<NavigationProvider>().onTap(1);
+          },
         ),
         SizedBox(height: KSizes.md),
         serviceProvider.isLoading

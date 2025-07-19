@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend/common/widgets/success_screen/success.dart';
 import 'package:frontend/core/routes/routes_constant.dart';
 import 'package:frontend/data/models/address_model.dart';
+import 'package:frontend/data/models/booking_model.dart';
 import 'package:frontend/data/models/service_model.dart';
 import 'package:frontend/data/models/vehicle_model.dart';
 import 'package:frontend/features/authentication/screens/login/login.dart';
@@ -11,6 +12,7 @@ import 'package:frontend/features/authentication/screens/verification/otp_verifi
 import 'package:frontend/features/dashboard/screens/home/home.dart';
 import 'package:frontend/features/dashboard/screens/service/service_booking_screen.dart';
 import 'package:frontend/features/dashboard/screens/service/service_confirm.dart';
+import 'package:frontend/features/dashboard/screens/service/service_tracking.dart';
 import 'package:frontend/navigation_menu.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -104,6 +106,16 @@ class AppRoutes {
           final bookingId = state.extra as String;
           return MaterialPage(
             child: ServiceConfirmScreen(bookingId: bookingId),
+          );
+        },
+      ),
+      GoRoute(
+        name: RoutesConstant.track,
+        path: "/track",
+        pageBuilder: (context, state) {
+          final booking = state.extra as BookingModel;
+          return MaterialPage(
+            child: ServiceTrackingScreen(booking: booking),
           );
         },
       ),
