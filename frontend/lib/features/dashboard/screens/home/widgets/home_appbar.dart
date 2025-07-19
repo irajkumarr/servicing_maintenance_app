@@ -29,7 +29,7 @@ class _HomeAppBarState extends State<HomeAppBar> {
   @override
   Widget build(BuildContext context) {
     final user = context.watch<LoginProvider>().user;
-    final addressProvider = context.read<AddressProvider>();
+    final addressProvider = context.watch<AddressProvider>();
     final address = addressProvider.defaultAddress;
     if (user == null) {
       return const Center(child: CircularProgressIndicator());
@@ -64,7 +64,7 @@ class _HomeAppBarState extends State<HomeAppBar> {
                           address.fullAddress!.isEmpty ||
                           addressProvider.isLoading
                       ? Text(
-                          "Loading",
+                          "Loading...",
                           style: Theme.of(context).textTheme.bodyLarge!
                               .copyWith(
                                 // color: KColors.white,
