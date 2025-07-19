@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:frontend/core/routes/routes_constant.dart';
 import 'package:frontend/core/utils/constants/colors.dart';
 import 'package:frontend/core/utils/constants/sizes.dart';
 import 'package:frontend/data/models/service_model.dart';
+import 'package:go_router/go_router.dart';
 import 'package:icons_plus/icons_plus.dart';
 
 class ServiceCardHorizontal extends StatelessWidget {
@@ -134,7 +136,12 @@ class ServiceCardHorizontal extends StatelessWidget {
                         ),
                         backgroundColor: KColors.black,
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        context.pushNamed(
+                          RoutesConstant.book,
+                          extra: service.id,
+                        );
+                      },
                       child: Text(
                         "Book Now",
                         style: Theme.of(context).textTheme.bodyLarge!.copyWith(

@@ -19,7 +19,13 @@ const handleGetAllBookings = async (req, res) => {
       .populate("user", "fullName email")
       .populate("vehicle")
       .populate("service")
-      .populate("provider");
+      .populate({
+        path: "provider",
+        populate: {
+          path: "user",
+          select: "fullName email phoneNumber",
+        },
+      });
 
     res.status(200).json(bookings);
   } catch (error) {
@@ -60,7 +66,11 @@ const handleCreateBooking = async (req, res) => {
     });
 
     await booking.save();
-    res.status(201).json({ status: true, message: "Booking Confirmed!" });
+    res.status(201).json({
+      status: true,
+      message: "Booking Confirmed!",
+      bookingId: booking._id,
+    });
   } catch (error) {
     res.status(500).json({ status: false, message: error.message });
   }
@@ -81,7 +91,13 @@ const handleGetUserBookings = async (req, res) => {
     )
       .populate("vehicle")
       .populate("service")
-      .populate("provider");
+      .populate({
+        path: "provider",
+        populate: {
+          path: "user",
+          select: "fullName email phoneNumber",
+        },
+      });
 
     res.status(200).json(bookings);
   } catch (error) {
@@ -93,11 +109,22 @@ const handleGetBookingById = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const booking = await Booking.findById(id)
-      .populate("user", "fullName email")
+    // const booking = await Booking.findById(id)
+    const booking = await Booking.findById(id, {
+      __v: 0,
+      updatedAt: 0,
+      createdAt: 0,
+    })
+      // .populate("user", "fullName email")
       .populate("vehicle")
       .populate("service")
-      .populate("provider");
+      .populate({
+        path: "provider",
+        populate: {
+          path: "user",
+          select: "fullName email phoneNumber",
+        },
+      });
 
     if (!booking) {
       return res

@@ -24,6 +24,7 @@ class NavigationMenu extends StatelessWidget {
             body: navigationProvider.screens.elementAt(
               navigationProvider.selectedIndex,
             ),
+
             bottomNavigationBar: BottomNavigationBar(
               backgroundColor: KColors.white,
               elevation: 1,

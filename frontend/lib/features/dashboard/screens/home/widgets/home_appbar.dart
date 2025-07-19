@@ -3,12 +3,38 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:frontend/core/utils/constants/colors.dart';
 import 'package:frontend/core/utils/constants/image_strings.dart';
 import 'package:frontend/core/utils/constants/sizes.dart';
+import 'package:frontend/features/authentication/providers/login_provider.dart';
+import 'package:frontend/features/dashboard/providers/address_provider.dart';
+import 'package:provider/provider.dart';
 
-class HomeAppBar extends StatelessWidget {
+class HomeAppBar extends StatefulWidget {
   const HomeAppBar({super.key});
 
   @override
+  State<HomeAppBar> createState() => _HomeAppBarState();
+}
+
+class _HomeAppBarState extends State<HomeAppBar> {
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Provider.of<AddressProvider>(
+        context,
+        listen: false,
+      ).fetchUserDefaultAddress();
+    });
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final user = context.watch<LoginProvider>().user;
+    final addressProvider = context.read<AddressProvider>();
+    final address = addressProvider.defaultAddress;
+    if (user == null) {
+      return const Center(child: CircularProgressIndicator());
+    }
+
     return AppBar(
       title: Padding(
         padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -16,7 +42,7 @@ class HomeAppBar extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Hi, Rajkumar!",
+              "Hi, ${user.fullName ?? "Loading..."}!",
               style: Theme.of(context).textTheme.headlineMedium!.copyWith(
                 fontWeight: FontWeight.w600,
                 // color: KColors.white,
@@ -32,16 +58,33 @@ class HomeAppBar extends StatelessWidget {
                 ),
                 const SizedBox(width: 4),
                 Expanded(
-                  child: Text(
-                    "Hetauda, Makwanpur",
-                    style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                      // color: KColors.white,
-                      color: KColors.darkerGrey,
+                  child:
+                      address == null ||
+                          address.fullAddress == null ||
+                          address.fullAddress!.isEmpty ||
+                          addressProvider.isLoading
+                      ? Text(
+                          "Loading",
+                          style: Theme.of(context).textTheme.bodyLarge!
+                              .copyWith(
+                                // color: KColors.white,
+                                color: KColors.darkerGrey,
 
-                      // fontStyle: FontStyle.normal,
-                    ),
-                    overflow: TextOverflow.ellipsis,
-                  ),
+                                fontStyle: FontStyle.italic,
+                              ),
+                          overflow: TextOverflow.ellipsis,
+                        )
+                      : Text(
+                          "${address.fullAddress}",
+                          style: Theme.of(context).textTheme.bodyLarge!
+                              .copyWith(
+                                // color: KColors.white,
+                                color: KColors.darkerGrey,
+
+                                // fontStyle: FontStyle.normal,
+                              ),
+                          overflow: TextOverflow.ellipsis,
+                        ),
                 ),
               ],
             ),

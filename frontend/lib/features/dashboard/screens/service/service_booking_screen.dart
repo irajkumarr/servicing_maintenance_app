@@ -874,7 +874,13 @@ class _ServiceBookingScreenState extends State<ServiceBookingScreen> {
                             String data = serviceBookingModelToJson(model);
                             final bookingProvider = context
                                 .read<BookingProvider>();
-                            await bookingProvider.bookService(context, data);
+                            await bookingProvider.bookService(
+                              context,
+                              data,
+                              service,
+                              selectedVehicle!,
+                              address!,
+                            );
                             // print(scheduledDateTime);
                           }
                         : null,

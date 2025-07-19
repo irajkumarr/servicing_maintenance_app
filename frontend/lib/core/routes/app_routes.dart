@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/common/widgets/success_screen/success.dart';
 import 'package:frontend/core/routes/routes_constant.dart';
+import 'package:frontend/data/models/address_model.dart';
+import 'package:frontend/data/models/service_model.dart';
+import 'package:frontend/data/models/vehicle_model.dart';
 import 'package:frontend/features/authentication/screens/login/login.dart';
 import 'package:frontend/features/authentication/screens/signup/signup.dart';
 import 'package:frontend/features/authentication/screens/splash/splash.dart';
@@ -16,8 +19,8 @@ final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 class AppRoutes {
   late GoRouter router = GoRouter(
-    initialLocation: "/bookConfirm",
-    // initialLocation: "/navigationMenu",
+    // initialLocation: "/bookConfirm",
+    initialLocation: "/navigationMenu",
     navigatorKey: navigatorKey,
 
     routes: [
@@ -98,7 +101,10 @@ class AppRoutes {
         name: RoutesConstant.bookConfirm,
         path: "/bookConfirm",
         pageBuilder: (context, state) {
-          return MaterialPage(child: ServiceConfirmScreen());
+          final bookingId = state.extra as String;
+          return MaterialPage(
+            child: ServiceConfirmScreen(bookingId: bookingId),
+          );
         },
       ),
     ],
