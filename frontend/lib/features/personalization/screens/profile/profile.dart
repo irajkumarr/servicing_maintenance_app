@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:frontend/core/routes/routes_constant.dart';
 import 'package:frontend/core/utils/circular_progress_indicator/custom_loading.dart';
 import 'package:frontend/core/utils/constants/colors.dart';
 import 'package:frontend/core/utils/constants/image_strings.dart';
@@ -66,7 +67,9 @@ class ProfileScreen extends StatelessWidget {
             InkWell(
               borderRadius: BorderRadius.circular(KSizes.sm),
 
-              onTap: () {},
+              onTap: () {
+                context.pushNamed(RoutesConstant.vehicle);
+              },
 
               child: Container(
                 width: KDeviceUtils.getScreenWidth(context),

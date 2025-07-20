@@ -7,10 +7,10 @@ import 'package:frontend/core/utils/constants/sizes.dart';
 import 'package:frontend/core/utils/device/device_utility.dart';
 import 'package:frontend/core/utils/shimmers/job_detail_shimmer.dart';
 import 'package:frontend/data/models/service_booking_model.dart';
-import 'package:frontend/features/dashboard/providers/address_provider.dart';
+import 'package:frontend/features/personalization/providers/address_provider.dart';
 import 'package:frontend/features/dashboard/providers/booking_provider.dart';
 import 'package:frontend/features/dashboard/providers/service_provider.dart';
-import 'package:frontend/features/dashboard/providers/vehicle_provider.dart';
+import 'package:frontend/features/personalization/providers/vehicle_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:frontend/data/models/vehicle_model.dart';
 

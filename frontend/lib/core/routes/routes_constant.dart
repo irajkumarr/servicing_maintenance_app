@@ -10,8 +10,8 @@ class RoutesConstant {
   static const String book = "book";
   static const String bookConfirm = "bookConfirm";
   static const String track = "track";
-  static const String changeRoom = "changeRoom";
-  static const String request = "request";
+  static const String address = "address";
+  static const String vehicle = "vehicle";
   static const String createStaff = "createStaff";
   static const String issue = "issue";
   static const String profile = "profile";

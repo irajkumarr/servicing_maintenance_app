@@ -4,7 +4,7 @@ import 'package:frontend/core/utils/constants/colors.dart';
 import 'package:frontend/core/utils/constants/image_strings.dart';
 import 'package:frontend/core/utils/constants/sizes.dart';
 import 'package:frontend/features/authentication/providers/login_provider.dart';
-import 'package:frontend/features/dashboard/providers/address_provider.dart';
+import 'package:frontend/features/personalization/providers/address_provider.dart';
 import 'package:provider/provider.dart';
 
 class HomeAppBar extends StatefulWidget {
