@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/common/widgets/texts/section_title.dart';
+import 'package:frontend/core/routes/routes_constant.dart';
 import 'package:frontend/core/utils/constants/colors.dart';
 import 'package:frontend/core/utils/constants/sizes.dart';
 import 'package:frontend/features/dashboard/screens/home/widgets/vehicle_selection_card.dart';
+import 'package:go_router/go_router.dart';
 import 'package:icons_plus/icons_plus.dart';
 
 class VehicleSelectionSection extends StatelessWidget {
@@ -17,7 +19,9 @@ class VehicleSelectionSection extends StatelessWidget {
           showButtonTitle: true,
           buttonTitle: "Manage",
           buttonColor: KColors.black,
-          onPressed: () {},
+          onPressed: () {
+            context.pushNamed(RoutesConstant.vehicle);
+          },
         ),
         SizedBox(height: KSizes.md),
         Row(
@@ -27,14 +31,14 @@ class VehicleSelectionSection extends StatelessWidget {
               child: VehicleSelectionCard(
                 title: "Car",
                 icon: AntDesign.car_outline,
-                onTap: () {},
+                // onTap: () {},
               ),
             ),
             Expanded(
               child: VehicleSelectionCard(
                 title: "Bike",
                 icon: Icons.motorcycle_outlined,
-                onTap: () {},
+                // onTap: () {},
               ),
             ),
           ],

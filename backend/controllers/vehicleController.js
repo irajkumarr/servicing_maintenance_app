@@ -22,6 +22,127 @@ const handleGetAllVehicles = async (req, res) => {
 };
 
 // POST /api/vehicles
+// const handleCreateVehicle = async (req, res) => {
+//   try {
+//     const {
+//       vehicleType,
+//       brand,
+//       model,
+//       year,
+//       registrationNumber,
+//       fuelType,
+//       color,
+//       isDefault,
+//     } = req.body;
+
+//     const stream = cloudinary.uploader.upload_stream(
+//       { folder: "servicing_app_images", resource_type: "image" },
+//       async (error, result) => {
+//         if (error) {
+//           return res.status(500).json({
+//             status: false,
+//             message: "Cloudinary upload failed",
+//             error,
+//           });
+//         }
+
+//         if (isDefault) {
+//           // unset others
+//           await Vehicle.updateMany(
+//             { owner: req.user.id },
+//             { isDefault: false }
+//           );
+//         }
+
+//         const vehicle = new Vehicle({
+//           owner: req.user.id,
+//           vehicleType,
+//           brand,
+//           model,
+//           year,
+//           registrationNumber,
+//           fuelType,
+//           color,
+//           vehiclePhoto: result.secure_url,
+//           isDefault,
+//         });
+
+//         await vehicle.save();
+//         res.status(201).json({ status: true, message: "Vehicle added" });
+//       }
+//     );
+//     stream.end(req.file.buffer);
+//   } catch (error) {
+//     // console.log(error);
+//     res.status(500).json({ status: false, message: error.message });
+//   }
+// };
+
+// const handleCreateVehicle = async (req, res) => {
+//   try {
+//     const {
+//       vehicleType,
+//       brand,
+//       model,
+//       year,
+//       registrationNumber,
+//       fuelType,
+//       color,
+//       isDefault,
+//     } = req.body;
+
+//     // if (!req.file) {
+//     //   return res
+//     //     .status(400)
+//     //     .json({ status: false, message: "Image is required" });
+//     // }
+
+//     const stream = cloudinary.uploader.upload_stream(
+//       { folder: "servicing_app_images", resource_type: "image" },
+//       async (error, result) => {
+//         if (error) {
+//           return res.status(500).json({
+//             status: false,
+//             message: "Cloudinary upload failed",
+//             error,
+//           });
+//         }
+
+//         if (isDefault) {
+//           await Vehicle.updateMany(
+//             { owner: req.user.id },
+//             { isDefault: false }
+//           );
+//         }
+
+//         const vehicle = new Vehicle({
+//           owner: req.user.id,
+//           vehicleType,
+//           brand,
+//           model,
+//           year,
+//           registrationNumber,
+//           fuelType,
+//           color,
+//           vehiclePhoto: result.secure_url,
+//           isDefault,
+//         });
+
+//         await vehicle.save();
+//         res.status(201).json({ status: true, message: "Vehicle added" });
+//       }
+//     );
+
+//     stream.end(req.file.buffer);
+//   } catch (error) {
+//     if (!res.headersSent) {
+//       res.status(500).json({ status: false, message: error.message });
+//     } else {
+//       console.error("Unhandled error after headers sent:", error);
+//     }
+//   }
+// };
+
 const handleCreateVehicle = async (req, res) => {
   try {
     const {
@@ -34,47 +155,50 @@ const handleCreateVehicle = async (req, res) => {
       color,
       isDefault,
     } = req.body;
-
-    const stream = cloudinary.uploader.upload_stream(
-      { folder: "servicing_app_images", resource_type: "image" },
-      async (error, result) => {
-        if (error) {
-          return res.status(500).json({
-            status: false,
-            message: "Cloudinary upload failed",
-            error,
-          });
-        }
-
-        if (isDefault) {
-          // unset others
-          await Vehicle.updateMany(
-            { owner: req.user.id },
-            { isDefault: false }
-          );
-        }
-
-        const vehicle = new Vehicle({
-          owner: req.user.id,
-          vehicleType,
-          brand,
-          model,
-          year,
-          registrationNumber,
-          fuelType,
-          color,
-          vehiclePhoto: result.secure_url,
-          isDefault,
-        });
-
-        await vehicle.save();
-        res.status(201).json({ status: true, message: "Vehicle added" });
+    const createVehicle = async (vehiclePhoto) => {
+      if (isDefault) {
+        await Vehicle.updateMany({ owner: req.user.id }, { isDefault: false });
       }
-    );
-    stream.end(req.file.buffer);
+
+      const vehicle = new Vehicle({
+        owner: req.user.id,
+        vehicleType,
+        brand,
+        model,
+        year,
+        registrationNumber,
+        fuelType,
+        color,
+        vehiclePhoto, // can be undefined or a URL
+        isDefault,
+      });
+
+      await vehicle.save();
+      return res.status(201).json({ status: true, message: "Vehicle added" });
+    };
+
+    if (req.file) {
+      const stream = cloudinary.uploader.upload_stream(
+        { folder: "servicing_app_images", resource_type: "image" },
+        async (error, result) => {
+          if (error) {
+            return res.status(500).json({
+              status: false,
+              message: "Cloudinary upload failed",
+              error,
+            });
+          }
+
+          await createVehicle(result.secure_url);
+        }
+      );
+
+      stream.end(req.file.buffer);
+    } else {
+      await createVehicle(); // no image
+    }
   } catch (error) {
-    // console.log(error);
-    res.status(500).json({ status: false, message: error.message });
+    return res.status(500).json({ status: false, message: error.message });
   }
 };
 

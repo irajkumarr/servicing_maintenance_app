@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/core/routes/routes_constant.dart';
 import 'package:frontend/core/utils/circular_progress_indicator/custom_loading.dart';
 import 'package:frontend/core/utils/constants/colors.dart';
 import 'package:frontend/core/utils/constants/sizes.dart';
 import 'package:frontend/data/models/vehicle_model.dart';
 import 'package:frontend/features/personalization/providers/vehicle_provider.dart';
 import 'package:frontend/features/personalization/screens/vehicle/widgets/vehicle_card.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 class VehicleScreen extends StatefulWidget {
@@ -38,7 +40,9 @@ class _VehicleScreenState extends State<VehicleScreen> {
           Padding(
             padding: const EdgeInsets.only(right: KSizes.md),
             child: InkWell(
-              onTap: () {},
+              onTap: () {
+                context.pushNamed(RoutesConstant.addVehicle);
+              },
 
               borderRadius: BorderRadius.circular(8),
               child: Container(

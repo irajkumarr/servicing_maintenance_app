@@ -12,6 +12,7 @@ import 'package:frontend/features/dashboard/screens/service/service_confirm.dart
 import 'package:frontend/features/dashboard/screens/service/service_tracking.dart';
 import 'package:frontend/features/personalization/screens/address/address.dart';
 import 'package:frontend/features/personalization/screens/vehicle/vehicle.dart';
+import 'package:frontend/features/personalization/screens/vehicle/widgets/add_edit_vehicle_screen.dart';
 import 'package:frontend/navigation_menu.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -20,7 +21,7 @@ final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 class AppRoutes {
   late GoRouter router = GoRouter(
-    // initialLocation: "/bookConfirm",
+    // initialLocation: "/addVehicle",
     initialLocation: "/navigationMenu",
     navigatorKey: navigatorKey,
 
@@ -128,6 +129,13 @@ class AppRoutes {
         path: "/vehicle",
         pageBuilder: (context, state) {
           return MaterialPage(child: VehicleScreen());
+        },
+      ),
+      GoRoute(
+        name: RoutesConstant.addVehicle,
+        path: "/addVehicle",
+        pageBuilder: (context, state) {
+          return MaterialPage(child: AddEditVehicleScreen());
         },
       ),
     ],

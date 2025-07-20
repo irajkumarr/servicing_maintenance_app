@@ -48,12 +48,12 @@ class _ServiceScreenState extends State<ServiceScreen> {
                   VehicleSelectionCard(
                     title: "Car",
                     icon: AntDesign.car_outline,
-                    onTap: () {},
+                    // onTap: () {},
                   ),
                   VehicleSelectionCard(
                     title: "Bike",
                     icon: Icons.motorcycle_outlined,
-                    onTap: () {},
+                    // onTap: () {},
                   ),
                 ],
               ),

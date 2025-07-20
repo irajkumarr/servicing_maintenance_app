@@ -46,13 +46,10 @@ const vehicleSchema = new mongoose.Schema(
           `${props.value} is not a valid brand for the selected vehicle type`,
       },
     },
-    model: { type: String, required: true },
+    // model: { type: String, required: true },
     year: { type: Number, required: true },
-    registrationNumber: {
-      type: String,
-      required: true,
-      unique: true,
-    },
+    model: { type: String, required: true },
+    registrationNumber: { type: String, required: true },
     fuelType: {
       type: String,
       enum: ["petrol", "diesel", "electric", "cng"],
