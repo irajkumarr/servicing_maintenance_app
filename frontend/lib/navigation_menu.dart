@@ -5,6 +5,7 @@ import 'package:frontend/features/authentication/providers/login_provider.dart';
 import 'package:frontend/features/dashboard/screens/home/home.dart';
 import 'package:frontend/features/dashboard/screens/service/service.dart';
 import 'package:frontend/features/dashboard/screens/service/service_history.dart';
+import 'package:frontend/features/personalization/screens/profile/profile.dart';
 import 'package:icons_plus/icons_plus.dart';
 // import 'package:iconsax/iconsax.dart';
 import 'package:provider/provider.dart';
@@ -70,12 +71,7 @@ class NavigationMenu extends StatelessWidget {
                   // activeIcon: Icon(Iconsax.home_1_bulk),
                 ),
                 BottomNavigationBarItem(
-                  icon: IconButton(
-                    onPressed: () async {
-                      await context.read<LoginProvider>().logout(context);
-                    },
-                    icon: Icon(Iconsax.user_outline),
-                  ),
+                  icon: Icon(Iconsax.user_outline),
                   label: "Profile",
 
                   // activeIcon: Icon(Iconsax.home_1_bulk),
@@ -94,7 +90,7 @@ class NavigationProvider with ChangeNotifier {
     HomeScreen(),
     ServiceScreen(),
     ServiceHistoryScreen(),
-    Container(color: Colors.purple),
+    ProfileScreen(),
   ];
 
   int selectedIndex = 0;
