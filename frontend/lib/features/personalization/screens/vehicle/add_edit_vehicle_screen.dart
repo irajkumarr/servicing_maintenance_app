@@ -19,7 +19,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 
-import '../../../dashboard/providers/service_provider.dart';
 
 class AddEditVehicleScreen extends StatefulWidget {
   const AddEditVehicleScreen({super.key, this.vehicle});
@@ -131,7 +130,6 @@ class _AddEditVehicleScreenState extends State<AddEditVehicleScreen> {
     final vehicleType = vehicleProvider.vehicleType;
     final brandList = vehicleType == "Car" ? carBrands : bikeBrands;
 
-    final serviceProvider = context.watch<ServiceProvider>();
 
     return FullScreenOverlay(
       isLoading: vehicleProvider.isLoading,
