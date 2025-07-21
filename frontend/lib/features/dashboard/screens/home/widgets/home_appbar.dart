@@ -5,6 +5,7 @@ import 'package:frontend/core/utils/constants/image_strings.dart';
 import 'package:frontend/core/utils/constants/sizes.dart';
 import 'package:frontend/features/authentication/providers/login_provider.dart';
 import 'package:frontend/features/personalization/providers/address_provider.dart';
+import 'package:frontend/navigation_menu.dart';
 import 'package:provider/provider.dart';
 
 class HomeAppBar extends StatefulWidget {
@@ -94,10 +95,15 @@ class _HomeAppBarState extends State<HomeAppBar> {
         ),
         Padding(
           padding: const EdgeInsets.only(right: KSizes.md),
-          child: SizedBox(
-            width: 40.w,
-            height: 40.h,
-            child: Image.asset(KImages.userIcon, fit: BoxFit.contain),
+          child: GestureDetector(
+            onTap: () {
+              context.read<NavigationProvider>().onTap(3);
+            },
+            child: SizedBox(
+              width: 40.w,
+              height: 40.h,
+              child: Image.asset(KImages.userIcon, fit: BoxFit.contain),
+            ),
           ),
         ),
       ],

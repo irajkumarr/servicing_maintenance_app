@@ -48,31 +48,43 @@ const handleAddUserAddress = async (req, res) => {
 
 // UPDATE address
 const handleUpdateAddress = async (req, res) => {
+  const addressId = req.params.id;
+  const userId = req.user.id;
+  const address = {
+    label: req.body.label,
+    fullAddress: req.body.fullAddress,
+
+    latitude: req.body.location.latitude,
+    longitude: req.body.location.longitude,
+
+    default: req.body.default,
+  };
+
   try {
-    const userId = req.user.id;
-    const addressId = req.params.id;
-
-    const address = await Address.findById(addressId);
-
-    if (!address || address.user.toString() !== userId) {
+    if (req.body.default) {
+      await Address.updateMany({ userId: req.user.id }, { default: false });
+    }
+    const findingAddress = await Address.findById(addressId);
+    if (!findingAddress || findingAddress.user.toString() !== userId) {
       return res
         .status(404)
         .json({ status: false, message: "Address not found or access denied" });
     }
-
-    const updates = req.body;
-
-    if (updates.isDefault) {
-      await Address.updateMany({ user: userId }, { isDefault: false });
+    const updatedAddress = await Address.findByIdAndUpdate(
+      addressId,
+      { $set: address },
+      {
+        new: true,
+      }
+    );
+    if (!updatedAddress) {
+      res.status(404).json({ message: "Address not updated" });
     }
-
-    Object.assign(address, updates);
-    await address.save();
-
     res
       .status(200)
-      .json({ status: true, message: "Address updated", data: address });
+      .json({ status: true, message: "Address updated Successfully" });
   } catch (error) {
+    console.log(error);
     res.status(500).json({ status: false, message: error.message });
   }
 };

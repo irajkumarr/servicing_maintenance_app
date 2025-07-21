@@ -47,7 +47,9 @@ class ProfileScreen extends StatelessWidget {
                   child: SizedBox(
                     height: 100.h,
                     width: 100.w,
-                    child: user.profileImage == null
+                    child:
+                        (user.profileImage == null ||
+                            user.profileImage!.isEmpty)
                         ? Image.asset(KImages.userIcon, fit: BoxFit.cover)
                         : Image.network(user.profileImage!, fit: BoxFit.cover),
                   ),
@@ -109,7 +111,9 @@ class ProfileScreen extends StatelessWidget {
             InkWell(
               borderRadius: BorderRadius.circular(KSizes.sm),
 
-              onTap: () {},
+              onTap: () {
+                context.pushNamed(RoutesConstant.address);
+              },
 
               child: Container(
                 width: KDeviceUtils.getScreenWidth(context),

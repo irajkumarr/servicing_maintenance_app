@@ -1,10 +1,13 @@
 // splash_screen.dart
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:frontend/core/utils/circular_progress_indicator/custom_loading.dart';
 import 'package:frontend/core/utils/constants/image_strings.dart';
 import 'package:frontend/core/utils/constants/sizes.dart';
+import 'package:frontend/features/authentication/providers/permission_provider.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:frontend/core/routes/routes_constant.dart';
 import 'package:frontend/core/utils/constants/colors.dart';
@@ -17,19 +20,36 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  late PermissionProvider _permissionProvider;
   @override
   void initState() {
     super.initState();
-    _checkAuth();
+    _checkAuthAndInitializePermission();
   }
 
-  Future<void> _checkAuth() async {
+  Future<void> _checkAuthAndInitializePermission() async {
     final prefs = await SharedPreferences.getInstance();
     final token = prefs.getString('token');
 
     final hasToken = token != null && token.isNotEmpty;
 
-    Future.delayed(const Duration(milliseconds: 3000), () {
+    Future.delayed(const Duration(milliseconds: 3000), () async {
+      _permissionProvider = Provider.of<PermissionProvider>(
+        context,
+        listen: false,
+      );
+
+      // Check permissions
+      bool permissionsGranted = await _permissionProvider
+          .checkAndRequestPermissions(context);
+
+      if (!permissionsGranted) {
+        if (mounted) {
+          SystemNavigator.pop();
+        }
+        return;
+      }
+
       if (hasToken) {
         context.goNamed(RoutesConstant.navigationMenu);
       } else {

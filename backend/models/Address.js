@@ -9,7 +9,8 @@ const addressSchema = new mongoose.Schema(
     },
     label: {
       type: String,
-      enum: ["home", "work", "other"],
+      // enum: ["home", "work", "other"],
+      required: true,
       default: "other",
     },
     fullAddress: {
@@ -18,7 +19,7 @@ const addressSchema = new mongoose.Schema(
     },
     city: {
       type: String,
-      required: true,
+      // required: true,
     },
     province: {
       type: String,
