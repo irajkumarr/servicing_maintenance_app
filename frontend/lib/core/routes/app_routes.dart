@@ -8,6 +8,7 @@ import 'package:frontend/features/authentication/screens/signup/signup.dart';
 import 'package:frontend/features/authentication/screens/splash/splash.dart';
 import 'package:frontend/features/authentication/screens/verification/otp_verification.dart';
 import 'package:frontend/features/dashboard/screens/home/home.dart';
+import 'package:frontend/features/dashboard/screens/search/search_screen.dart';
 import 'package:frontend/features/dashboard/screens/service/service_booking_screen.dart';
 import 'package:frontend/features/dashboard/screens/service/service_confirm.dart';
 import 'package:frontend/features/dashboard/screens/service/service_tracking.dart';
@@ -138,6 +139,14 @@ class AppRoutes {
         pageBuilder: (context, state) {
           final vehicle = state.extra as VehicleModel?;
           return MaterialPage(child: AddEditVehicleScreen(vehicle: vehicle));
+        },
+      ),
+      GoRoute(
+        name: RoutesConstant.search,
+        path: "/search",
+        pageBuilder: (context, state) {
+         
+          return MaterialPage(child: SearchScreen());
         },
       ),
     ],

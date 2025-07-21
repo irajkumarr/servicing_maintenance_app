@@ -13,7 +13,7 @@ class RoutesConstant {
   static const String address = "address";
   static const String vehicle = "vehicle";
   static const String addVehicle = "addVehicle";
-  static const String addAddress = "addAddress";
+  static const String search = "search";
   static const String profile = "profile";
   static const String myIssues = "myIssues";
 }

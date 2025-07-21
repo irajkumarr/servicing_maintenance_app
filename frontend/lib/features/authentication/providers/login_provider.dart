@@ -103,7 +103,7 @@ class LoginProvider with ChangeNotifier {
 
     if (context.mounted) {
       context.goNamed(
-        RoutesConstant.login,
+        RoutesConstant.splash,
       ); // Use goNamed instead of pushReplacementNamed
       KSnackbar.CustomSnackbar(context, "Logout Successful", KColors.primary);
     }

@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:frontend/core/utils/circular_progress_indicator/custom_loading.dart';
 import 'package:frontend/core/utils/constants/colors.dart';
 import 'package:frontend/core/utils/constants/sizes.dart';
+import 'package:frontend/core/utils/device/device_utility.dart';
 import 'package:frontend/data/models/service_model.dart' as serviceModel;
 import 'package:frontend/features/dashboard/screens/home/widgets/vehicle_selection_card.dart';
 import 'package:frontend/features/dashboard/screens/service/widgets/service_card_horizontal.dart';
+import 'package:frontend/features/personalization/providers/vehicle_provider.dart';
+import 'package:frontend/navigation_menu.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:provider/provider.dart';
 
@@ -21,7 +24,15 @@ class _ServiceScreenState extends State<ServiceScreen> {
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.read<ServiceProvider>().fetchServices();
+      // context.read<ServiceProvider>().fetchServices();
+
+      final vehicleProvider = Provider.of<VehicleProvider>(
+        context,
+        listen: false,
+      );
+      context.read<ServiceProvider>().fetchServicesByType(
+        vehicleProvider.vehicleType!.toLowerCase(),
+      );
     });
     super.initState();
   }
@@ -29,6 +40,7 @@ class _ServiceScreenState extends State<ServiceScreen> {
   @override
   Widget build(BuildContext context) {
     final serviceProvider = context.watch<ServiceProvider>();
+    final vehicleProvider = context.watch<VehicleProvider>();
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -48,12 +60,24 @@ class _ServiceScreenState extends State<ServiceScreen> {
                   VehicleSelectionCard(
                     title: "Car",
                     icon: AntDesign.car_outline,
-                    // onTap: () {},
+                    onTap: () async {
+                      vehicleProvider.selectVehicleType("Car");
+
+                      await serviceProvider.fetchServicesByType(
+                        vehicleProvider.vehicleType!.toLowerCase(),
+                      );
+                    },
                   ),
                   VehicleSelectionCard(
                     title: "Bike",
                     icon: Icons.motorcycle_outlined,
-                    // onTap: () {},
+                    onTap: () async {
+                      vehicleProvider.selectVehicleType("Bike");
+
+                      await serviceProvider.fetchServicesByType(
+                        vehicleProvider.vehicleType!.toLowerCase(),
+                      );
+                    },
                   ),
                 ],
               ),
@@ -66,21 +90,23 @@ class _ServiceScreenState extends State<ServiceScreen> {
             ? Center(
                 child: Text('Error: ${serviceProvider.error?.message ?? ""}'),
               )
-            : serviceProvider.topRatedServices.isEmpty
+            : serviceProvider.servicesByType.isEmpty
             ? Center(child: Text('No Available Services'))
             : RefreshIndicator(
                 onRefresh: () async {
-                  await serviceProvider.fetchServices();
+                  await serviceProvider.fetchServicesByType(
+                    vehicleProvider.vehicleType!.toLowerCase(),
+                  );
                 },
                 child: ListView.builder(
                   padding: EdgeInsets.symmetric(
                     horizontal: KSizes.md,
                     vertical: KSizes.md,
                   ),
-                  itemCount: serviceProvider.services.length,
+                  itemCount: serviceProvider.servicesByType.length,
                   itemBuilder: (context, index) {
                     serviceModel.ServiceModel service =
-                        serviceProvider.services[index];
+                        serviceProvider.servicesByType[index];
                     return ServiceCardHorizontal(service: service);
                   },
                 ),

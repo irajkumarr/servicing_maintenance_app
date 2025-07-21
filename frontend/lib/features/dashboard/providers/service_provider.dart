@@ -141,4 +141,50 @@ class ServiceProvider with ChangeNotifier {
       notifyListeners();
     }
   }
+
+  List<ServiceModel> _servicesByType = [];
+
+  List<ServiceModel> get servicesByType => _servicesByType;
+
+  Future<void> fetchServicesByType(String type) async {
+    _isLoading = true;
+    _error = null;
+
+    notifyListeners();
+    final prefs = await SharedPreferences.getInstance();
+    final token = prefs.getString('token');
+
+    if (token == null) return;
+    try {
+      final response = await http.get(
+        Uri.parse("$kAppBaseUrl/api/services/type/?type=$type"),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $token',
+        },
+      );
+      // print(response.statusCode);
+      if (response.statusCode == 200) {
+        _servicesByType = serviceModelFromJson(response.body);
+        // _service = ServiceModel.fromJson(jsonData);
+
+        _error = null; // No error
+      } else {
+        // print("Status Code: ${response.statusCode}");
+        // print("Response Body: ${response.body}");
+        _error = ErrorModel(
+          status: false,
+          message: "Failed to load service $type.",
+        );
+        print(_error?.toJson());
+        _servicesByType = [];
+      }
+    } catch (e) {
+      _error = ErrorModel(status: false, message: e.toString());
+      _servicesByType = [];
+    } finally {
+      _isLoading = false;
+      notifyListeners();
+    }
+  }
 }

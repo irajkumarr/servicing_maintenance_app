@@ -52,6 +52,34 @@ const handleGetServiceById = async (req, res) => {
   }
 };
 
+// const handleGetServicesByType = async (req, res) => {
+//   const { type } = req.query;
+
+//   if (!["car", "bike", "both"].includes(type)) {
+//     return res.status(400).json({
+//       status: false,
+//       message: "Invalid type. Use 'car', 'bike', or 'both'.",
+//     });
+//   }
+
+//   try {
+//     const services = await Service.find(
+//       { type, isActive: true },
+//       { __v: 0, updatedAt: 0, createdAt: 0 }
+//     ).populate({
+//       path: "serviceProvider",
+//       select: "user address availabilityStatus",
+//       populate: {
+//         path: "user",
+//         select: "name email phoneNumber",
+//       },
+//     });
+//     res.status(200).json(services);
+//   } catch (error) {
+//     res.status(500).json({ status: false, message: error.message });
+//   }
+// };
+
 const handleGetServicesByType = async (req, res) => {
   const { type } = req.query;
 
@@ -63,8 +91,11 @@ const handleGetServicesByType = async (req, res) => {
   }
 
   try {
+    // If type is 'car' or 'bike', include both type services too
+    const typesToQuery = type === 'both' ? ['both'] : [type, 'both'];
+
     const services = await Service.find(
-      { type, isActive: true },
+      { type: { $in: typesToQuery }, isActive: true },
       { __v: 0, updatedAt: 0, createdAt: 0 }
     ).populate({
       path: "serviceProvider",
@@ -74,11 +105,13 @@ const handleGetServicesByType = async (req, res) => {
         select: "name email phoneNumber",
       },
     });
+
     res.status(200).json(services);
   } catch (error) {
     res.status(500).json({ status: false, message: error.message });
   }
 };
+
 
 const handleCreateService = async (req, res) => {
   const { title, description, category, type, basePrice, estimatedTime } =
@@ -252,6 +285,79 @@ const handleRateService = async (req, res) => {
     res.status(500).json({ status: false, message: error.message });
   }
 };
+
+const handleSearchService = async (req, res) => {
+  const search = req.params.search;
+
+  try {
+    const results = await Service.aggregate([
+      {
+        $search: {
+          index: "services",
+          compound: {
+            should: [
+              {
+                text: {
+                  query: search,
+                  path: ["title"],
+                  fuzzy: {
+                    maxEdits: 2,
+                    prefixLength: 1,
+                  },
+                },
+              },
+            ],
+          },
+        },
+      },
+      {
+        $lookup: {
+          from: "serviceproviders",
+          localField: "serviceProvider",
+          foreignField: "_id",
+          as: "serviceProvider",
+        },
+      },
+      { $unwind: "$serviceProvider" },
+      {
+        $lookup: {
+          from: "users",
+          localField: "serviceProvider.user",
+          foreignField: "_id",
+          as: "user",
+        },
+      },
+      { $unwind: "$user" },
+      {
+        $addFields: {
+          serviceProvider: {
+            availabilityStatus: "$serviceProvider.availabilityStatus",
+            address: "$serviceProvider.address",
+            user: {
+              email: "$user.email",
+              phoneNumber: "$user.phoneNumber",
+            },
+          },
+        },
+      },
+      {
+        $project: {
+          user: 0, // Remove temporary field used for reshaping
+          __v: 0,
+        },
+      },
+      { $limit: 15 },
+    ]);
+
+    res.status(200).json(results);
+  } catch (error) {
+    res.status(500).json({
+      status: false,
+      message: error.message,
+    });
+  }
+};
+
 module.exports = {
   handleCreateService,
   handleDeleteService,
@@ -260,4 +366,5 @@ module.exports = {
   handleGetServicesByType,
   handleGetTopRatedServices,
   handleRateService,
+  handleSearchService,
 };

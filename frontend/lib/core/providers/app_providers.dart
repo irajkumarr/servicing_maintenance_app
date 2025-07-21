@@ -4,6 +4,7 @@ import 'package:frontend/features/authentication/providers/password_provider.dar
 import 'package:frontend/features/authentication/providers/permission_provider.dart';
 import 'package:frontend/features/authentication/providers/signup_provider.dart';
 import 'package:frontend/features/authentication/providers/timer_provider.dart';
+import 'package:frontend/features/dashboard/providers/search_provider.dart';
 import 'package:frontend/features/personalization/providers/address_provider.dart';
 import 'package:frontend/features/dashboard/providers/booking_provider.dart';
 import 'package:frontend/features/dashboard/providers/service_provider.dart';
@@ -24,6 +25,7 @@ class AppProviders {
     ChangeNotifierProvider(create: (_) => LoginProvider()),
     ChangeNotifierProvider(create: (_) => SignupProvider()),
     ChangeNotifierProvider(create: (_) => ServiceProvider()),
+    ChangeNotifierProvider(create: (_) => SearchProvider()),
     ChangeNotifierProvider(create: (_) => VehicleProvider()),
     ChangeNotifierProvider(create: (_) => AddressProvider()),
     ChangeNotifierProvider(create: (_) => BookingProvider()),

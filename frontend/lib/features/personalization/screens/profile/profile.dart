@@ -153,8 +153,8 @@ class ProfileScreen extends StatelessWidget {
               borderRadius: BorderRadius.circular(KSizes.sm),
 
               onTap: () {
-                context.read<NavigationProvider>().onTap(0);
                 context.read<LoginProvider>().logout(context);
+                context.read<NavigationProvider>().onTap(0);
               },
 
               child: Container(
