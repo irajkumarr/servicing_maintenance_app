@@ -154,7 +154,6 @@ class ProfileScreen extends StatelessWidget {
 
               onTap: () {
                 context.read<LoginProvider>().logout(context);
-                context.read<NavigationProvider>().onTap(0);
               },
 
               child: Container(

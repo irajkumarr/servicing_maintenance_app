@@ -6,8 +6,10 @@ import 'package:frontend/core/utils/constants/api_constants.dart';
 import 'package:frontend/core/utils/constants/colors.dart';
 import 'package:frontend/data/models/error_model.dart';
 import 'package:frontend/data/models/user_model.dart';
+import 'package:frontend/navigation_menu.dart';
 import 'package:go_router/go_router.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginProvider with ChangeNotifier {
@@ -102,9 +104,9 @@ class LoginProvider with ChangeNotifier {
     _user = null;
 
     if (context.mounted) {
-      context.goNamed(
-        RoutesConstant.splash,
-      ); // Use goNamed instead of pushReplacementNamed
+      context.goNamed(RoutesConstant.splash);
+
+      context.read<NavigationProvider>().onTap(0);
       KSnackbar.CustomSnackbar(context, "Logout Successful", KColors.primary);
     }
     notifyListeners();

@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:frontend/core/services/notification_service.dart';
 import 'package:frontend/core/utils/circular_progress_indicator/custom_loading.dart';
 import 'package:frontend/core/utils/constants/image_strings.dart';
 import 'package:frontend/core/utils/constants/sizes.dart';
@@ -49,7 +50,12 @@ class _SplashScreenState extends State<SplashScreen> {
         }
         return;
       }
-
+// Initialize notifications
+      final NotificationService notificationService = NotificationService();
+      await notificationService.requestNotificationPermission(context);
+      await notificationService.getDeviceToken();
+      notificationService.firebaseInit(context);
+      notificationService.setupInteractMessage(context);
       if (hasToken) {
         context.goNamed(RoutesConstant.navigationMenu);
       } else {
