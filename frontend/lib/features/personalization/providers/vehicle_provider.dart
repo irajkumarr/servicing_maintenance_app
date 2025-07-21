@@ -2,7 +2,10 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:frontend/common/widgets/alert_box/snackbar.dart';
+import 'package:frontend/core/routes/app_routes.dart';
 import 'package:frontend/core/utils/constants/api_constants.dart';
+import 'package:frontend/core/utils/constants/colors.dart';
 import 'package:frontend/data/models/error_model.dart';
 import 'package:frontend/data/models/vehicle_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -111,7 +114,7 @@ class VehicleProvider with ChangeNotifier {
       // }
       if (imageFile != null) {
         request.files.add(
-          await http.MultipartFile.fromPath("profileImage", imageFile.path),
+          await http.MultipartFile.fromPath("image", imageFile.path),
         );
       }
 
@@ -131,6 +134,106 @@ class VehicleProvider with ChangeNotifier {
       _error = ErrorModel(status: false, message: e.toString());
       print(e.toString());
       return false;
+    } finally {
+      _isLoading = false;
+      notifyListeners();
+    }
+  }
+
+  Future<void> deleteVehicle(String vehicleId) async {
+    _isLoading = true;
+    _error = null;
+    notifyListeners();
+    final prefs = await SharedPreferences.getInstance();
+    final token = prefs.getString('token');
+
+    if (token == null) return;
+    try {
+      final response = await http.delete(
+        Uri.parse('$kAppBaseUrl/api/vehicles/$vehicleId'),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $token',
+        },
+      );
+
+      final data = json.decode(response.body);
+
+      if (response.statusCode == 200) {
+        final message = data["message"];
+        await fetchUserVehicles();
+
+        KSnackbar.CustomSnackbar(
+          navigatorKey.currentState!.context,
+          message,
+          KColors.primary,
+        );
+
+        _error = null;
+      } else {
+        final errorMessage = data['message'] ?? 'Unknown error';
+        _error = ErrorModel(status: false, message: errorMessage);
+
+        KSnackbar.CustomSnackbar(
+          navigatorKey.currentState!.context,
+          errorMessage,
+          Colors.red,
+        );
+      }
+    } catch (e) {
+      _error = ErrorModel(status: false, message: e.toString());
+
+      KSnackbar.CustomSnackbar(
+        navigatorKey.currentState!.context,
+        e.toString(),
+        Colors.red,
+      );
+    } finally {
+      _isLoading = false;
+      notifyListeners();
+    }
+  }
+
+  Future<void> updateVehicle(
+    BuildContext context,
+    String vehicleId,
+    String updatedata,
+    VoidCallback onSuccess,
+  ) async {
+    _isLoading = true;
+    _error = null;
+    notifyListeners();
+    final prefs = await SharedPreferences.getInstance();
+    final token = prefs.getString('token');
+
+    if (token == null) return;
+    try {
+      final response = await http.put(
+        Uri.parse('$kAppBaseUrl/api/vehicles/$vehicleId'),
+        headers: {
+          'Authorization': 'Bearer $token',
+          'Content-Type': 'application/json',
+        },
+        body: updatedata,
+      );
+      print(token);
+      print(response.statusCode);
+      print(response.body);
+      if (response.statusCode == 200) {
+        KSnackbar.CustomSnackbar(
+          context,
+          "Successfully updated!",
+          KColors.primary,
+        );
+        onSuccess();
+      } else {
+        var error = jsonDecode(response.body)['message'];
+        print(error.toString());
+
+        KSnackbar.CustomSnackbar(context, error.toString(), KColors.error);
+      }
+    } catch (error) {
+      rethrow;
     } finally {
       _isLoading = false;
       notifyListeners();

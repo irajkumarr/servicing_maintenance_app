@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/common/widgets/alert_box/alert_box.dart';
+import 'package:frontend/core/routes/routes_constant.dart';
 import 'package:frontend/core/utils/constants/colors.dart';
 import 'package:frontend/core/utils/constants/sizes.dart';
 import 'package:frontend/data/models/vehicle_model.dart';
+import 'package:frontend/features/personalization/providers/vehicle_provider.dart';
+import 'package:go_router/go_router.dart';
 import 'package:icons_plus/icons_plus.dart';
+import 'package:provider/provider.dart';
 
 // class VehicleCard extends StatelessWidget {
 //   const VehicleCard({super.key, required this.vehicle});
@@ -82,6 +87,7 @@ class VehicleCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final vehicleProvider = context.watch<VehicleProvider>();
     String getVehicleIcon(String vehicleType) {
       switch (vehicleType.toLowerCase()) {
         case 'car':
@@ -150,7 +156,10 @@ class VehicleCard extends StatelessWidget {
                       size: KSizes.iconSm,
                     ),
                     onPressed: () {
-                      // TODO: Handle edit logic
+                      context.pushNamed(
+                        RoutesConstant.addVehicle,
+                        extra: vehicle,
+                      );
                     },
                   ),
                   IconButton(
@@ -159,8 +168,14 @@ class VehicleCard extends StatelessWidget {
                       color: KColors.error,
                       size: KSizes.iconSm,
                     ),
-                    onPressed: () {
-                      // TODO: Handle delete logic
+                    onPressed: () async {
+                      await CustomAlertBox.showAlert(
+                        context,
+                        "Are you sure you want to delete this vehicle?",
+                        () async {
+                          await vehicleProvider.deleteVehicle(vehicle.id!);
+                        },
+                      );
                     },
                   ),
                 ],
