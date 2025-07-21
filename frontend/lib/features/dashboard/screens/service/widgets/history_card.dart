@@ -182,7 +182,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:frontend/core/routes/routes_constant.dart';
 import 'package:frontend/core/utils/constants/colors.dart';
 import 'package:frontend/core/utils/constants/sizes.dart';
-import 'package:frontend/core/utils/device/device_utility.dart';
 import 'package:frontend/data/models/booking_model.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';

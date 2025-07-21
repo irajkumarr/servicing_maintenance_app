@@ -8,7 +8,6 @@ import 'package:frontend/core/utils/constants/sizes.dart';
 import 'package:frontend/core/utils/device/device_utility.dart';
 import 'package:frontend/data/models/user_model.dart';
 import 'package:frontend/features/authentication/providers/login_provider.dart';
-import 'package:frontend/navigation_menu.dart';
 import 'package:go_router/go_router.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:provider/provider.dart';

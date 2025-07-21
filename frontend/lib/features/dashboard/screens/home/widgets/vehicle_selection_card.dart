@@ -52,7 +52,6 @@ import 'package:frontend/core/utils/constants/sizes.dart';
 // import 'package:frontend/data/models/service_model.dart' as serviceModel;
 import 'package:frontend/features/dashboard/providers/service_provider.dart';
 import 'package:frontend/features/personalization/providers/vehicle_provider.dart';
-import 'package:frontend/navigation_menu.dart';
 import 'package:provider/provider.dart';
 
 class VehicleSelectionCard extends StatelessWidget {
