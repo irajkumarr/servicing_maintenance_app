@@ -1,6 +1,7 @@
-# 🚗🛵 ServiceOnWheels – On-Demand Vehicle Servicing & Maintenance App
+# 🚘 ServiceOnWheels – On-Demand Car & Bike Servicing App
 
-**ServiceOnWheels** is a mobile application that simplifies car and bike maintenance by allowing users to book services, add vehicles, and manage service history — all from their phone. It also sends real-time notifications for offers and updates and uses Google Maps for seamless address selection.
+**ServiceOnWheels** is an on-demand **vehicle servicing and maintenance app** that helps users easily book, schedule, and track car/bike services.  
+From oil changes to engine repairs, users can conveniently manage their vehicles and receive timely updates.
 
 ---
 
@@ -20,18 +21,25 @@
 ## 🧪 Tech Stack
 
 ### 🔹 Frontend (Flutter)
+
 - **Flutter** – Mobile UI
 - **Provider** – State management
 - **Firebase** – Push notifications
 - **Google Maps API** – Location/address selection
 - **Shared Preferences** – Local storage
 - **GoRouter** – Route navigation
+- **Maps & Location Services:** Google Maps API
 
 ### 🔹 Backend (Node.js)
+
 - **Node.js + Express.js** – RESTful APIs
 - **MongoDB (Atlas)** – Database
 - **Mongoose** – Schema-based ODM
 
 ---
 
+## 📱 Screenshots
 
+| Home                                                                                                                   | Services                                                                                                                   | Booking                                                                                                                   | Invoice                                                                                                                   |
+| ---------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| ![Home](https://res.cloudinary.com/dbfocstdc/image/upload/v1755500492/c1db26a8-cad3-4390-98fe-5fce4e51a42e_t0h2dj.jpg) | ![Services](https://res.cloudinary.com/dbfocstdc/image/upload/v1755500455/68825221-ef8d-4433-9cf0-2a201cfe6816_zgwcjf.jpg) | ![Booking](https://res.cloudinary.com/dbfocstdc/image/upload/v1755500455/68825221-ef8d-4433-9cf0-2a201cfe6816_zgwcjf.jpg) | ![Invoice](https://res.cloudinary.com/dbfocstdc/image/upload/v1755500449/3c97c340-2dc5-48c2-96c6-378eb0fc2249_wevwwz.jpg) |
